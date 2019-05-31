@@ -8,7 +8,7 @@ export default class DropdownHeaderComponent extends Component {
         return (
             <div className="dropdown-header">
                     <DropdownArrow toogle={this.props.toogle}/>
-                    <span>{this.props.name}</span>
+                    <span className="header-label">{this.props.name}</span>
                     <span className="selectedValues">{selectedMock.toString()}</span>
             </div>
         )

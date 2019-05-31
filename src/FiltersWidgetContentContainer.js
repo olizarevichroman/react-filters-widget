@@ -16,6 +16,7 @@ class FiltersWidgetContentContainer extends Component {
                 <DropdownsContainer/>
                 <FilterComponent/>
             </div>
+            
         );
     }
 }
