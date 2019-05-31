@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContentElementComponent from './ContentElementComponent';
 
 const mockResults = [
-    "(All)", "Pre Roll", "Age Zero"
+    "(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero"
 ]
 
 class FilterResultComponent extends Component {
