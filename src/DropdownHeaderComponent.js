@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
+import DropdownArrow from './DropdownArrow';
 
 const selectedMock = ["Test", "TestStory"];
 
 export default class DropdownHeaderComponent extends Component {
     render() {
         return (
-            <div className="dropdown-header" onClick={this.props.toogle}>
-                    <span>Contexts</span>
+            <div className="dropdown-header">
+                    <DropdownArrow toogle={this.props.toogle}/>
+                    <span>{this.props.name}</span>
                     <span className="selectedValues">{selectedMock.toString()}</span>
-                </div>
+            </div>
         )
     }
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export default class DropdownContentElementComponent extends Component {
+export default class ContentElementComponent extends Component {
 
     constructor(props)
     {

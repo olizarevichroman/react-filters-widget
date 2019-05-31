@@ -20,7 +20,7 @@ export default class Dropdown extends Component {
     render() {
         return (
             <div>
-                <DropdownHeaderComponent toogle={this.toogleDropdown}/>
+                <DropdownHeaderComponent toogle={this.toogleDropdown} name={this.props.name}/>
                 <DropdownContentComponent isVisible={this.state.isVisible}/>
             </div>
         )

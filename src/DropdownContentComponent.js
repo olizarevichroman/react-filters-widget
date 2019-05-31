@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import DropdownContentElementComponent from './DropdownContentElementComponent';
+import ContentElementComponent from './ContentElementComponent';
 
 const mock = ["Editor", "Test", "Test story", "Cross"];
 
@@ -16,7 +16,7 @@ export default class DropdownContentComponent extends Component {
         return (
                 <ul className={classNames}>
                     
-                    {mock.map((value, index) => <DropdownContentElementComponent 
+                    {mock.map((value, index) => <ContentElementComponent 
                             
                             key={index} 
                             text={value} />)}
