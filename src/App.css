@@ -40,12 +40,24 @@
   padding: 5px;
 }
 
+.fa-bars
+{
+  color: #777;
+  transform: rotate(90deg);
+}
+
+.fa-bars:hover
+{
+  cursor: move;
+}
+
 .filtersWidget
 {
   background-color: #474646;
   color: #fff8f7;
   width: 260px;
   position: relative;
+  z-index: 1000;
 }
 
 .header-label

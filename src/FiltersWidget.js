@@ -8,9 +8,17 @@ export default class FiltersWidget extends Component {
     {
         super(props);
 
-        this.state = {isContentVisible : true};
+        this.state = {isContentVisible : true, left: 30, top: 40};
         this.toogleContent = this.toggleContent.bind(this);
+        this.shift = this.shift.bind(this);
     }
+
+    shift(shiftX, shiftY)
+    {
+        console.log("shift: ", shiftX, shiftY);
+        this.setState((prev) => ({top: prev.top + shiftY, left: prev.left + shiftX}));
+    }
+    
 
     toggleContent()
     {
@@ -19,8 +27,8 @@ export default class FiltersWidget extends Component {
 
     render() {
         return (
-            <div className="filtersWidget">
-                <FiltersWidgetHeader toogleContent={this.toogleContent}/>
+            <div className="filtersWidget" style={{left: this.state.left, top: this.state.top}}>
+                <FiltersWidgetHeader toogleContent={this.toogleContent} shift={this.shift}/>
                 <FiltersWidgetContentContainer isContentVisible={this.state.isContentVisible}/>
             </div>
         )
