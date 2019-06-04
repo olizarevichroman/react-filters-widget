@@ -51,6 +51,12 @@
   cursor: move;
 }
 
+.dropdown-arrow
+{
+  display: inline-block;
+  margin-left: 5px;
+}
+
 .filtersWidget
 {
   background-color: #474646;
