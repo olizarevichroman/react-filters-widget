@@ -15,7 +15,6 @@ export default class FiltersWidget extends Component {
 
     shift(shiftX, shiftY)
     {
-        console.log("shift: ", shiftX, shiftY);
         this.setState((prev) => ({top: prev.top + shiftY, left: prev.left + shiftX}));
     }
     
@@ -28,7 +27,7 @@ export default class FiltersWidget extends Component {
     render() {
         return (
             <div className="filtersWidget" style={{left: this.state.left, top: this.state.top}}>
-                <FiltersWidgetHeader toogleContent={this.toogleContent} shift={this.shift}/>
+                <FiltersWidgetHeader toogleContent={this.toogleContent} shift={this.shift} isContentVisible={this.state.isContentVisible}/>
                 <FiltersWidgetContentContainer isContentVisible={this.state.isContentVisible}/>
             </div>
         )

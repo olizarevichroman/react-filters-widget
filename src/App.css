@@ -120,11 +120,19 @@
   margin-bottom: 20px;
 }
 
-.filterElement
+.filter-element
 {
-  background-color: #383737;
   display: inline-block;
   margin-left: 10px;
+  border-radius: 2px;
+  border: 1px solid #b8b8b8;
+  padding: 0px 3px 0px 3px;
+  font-size: 12px;
+}
+
+.filter-element:hover
+{
+  cursor: pointer;
 }
 
 .filtersWidgetHeader
@@ -172,7 +180,7 @@
   padding-left: 4px;
 }
 
-.close-thik:hover
+.open-close-thik:hover
 {
   cursor: pointer;
 }
@@ -180,9 +188,10 @@
 .fa-search
 {
   color: #777;
+  font-size: 14px;
 }
 
-.close-thik {
+.open-close-thik {
   color: #777;
   position: absolute;
   right: 10px;
