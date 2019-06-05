@@ -11,22 +11,22 @@ class FilterElement extends Component {
         this.isActive = false;
         this.onClick = this.onClick.bind(this);
         this.backgrounds = {active: "#7d7d78", inactive: "#383737"};
-        this.state = {"background-color": this.backgrounds.inactive};
+        this.state = {"backgroundColor": this.backgrounds.inactive};
     }
 
-
+    //also here should be some logic to provide a filter function, which will be applied immediately after filter is swithed to active
     onClick()
     {
         this.isActive = !this.isActive;
 
         var background = this.isActive ? this.backgrounds.active : this.backgrounds.inactive;
 
-        this.setState({"background-color": background});
+        this.setState({"backgroundColor": background});
     }
 
     render() {
         return (
-            <p className="filter-element text-wrapper" style={{"background-color" : this.state["background-color"]}} onClick={this.onClick}>{this.props.label}</p>
+            <p className="filter-element text-wrapper" style={{"backgroundColor" : this.state["backgroundColor"]}} onClick={this.onClick}>{this.props.label}</p>
         );
     }
 }

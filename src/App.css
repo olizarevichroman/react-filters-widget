@@ -4,12 +4,16 @@
   box-sizing: border-box;
   position: absolute;
   margin: 0;
-  padding: 0;
+  padding: 10px 0px 0px 0px ;
+  max-height: 300px;
+  overflow-y: scroll;
   width: 230px;
   left: 10px;
   background-color: #383737;
   z-index: 10;
 }
+
+
 
 .filter-elements-wrapper
 {
@@ -59,7 +63,7 @@
 
 .filtersWidget
 {
-  background-color: #474646;
+  background-color: #535357;
   color: #fff8f7;
   width: 260px;
   position: relative;
@@ -130,6 +134,17 @@
   font-size: 12px;
 }
 
+.dropdown-element
+{
+  padding: 10px;
+  font-size: 12px;
+}
+
+.dropdown-element:first-child
+{
+  padding-top: 0px;
+}
+
 .filter-element:hover
 {
   cursor: pointer;
@@ -144,14 +159,14 @@
 .fa-angle-down
 {
   cursor: pointer;
-  color: #777;
-  font-size: 20px;
+  font-size: 16px;
 }
 
 .widget-content-container
 {
   position: relative;
-  border-top: 2px solid #3d7dcc;
+  border-top: 1px solid #3d7dcc;
+  background-color: #474646;
 }
 
 .inactive
@@ -187,7 +202,7 @@
 
 .fa-search
 {
-  color: #777;
+  color: #a3a3a3;
   font-size: 14px;
 }
 
@@ -206,9 +221,7 @@
 
 .dropdowns-container
 {
-  width: 250px;
   position: relative;
-  background-color: #383737;
   vertical-align: middle;
   font-size: 14px;
 }
@@ -223,11 +236,7 @@ input[type="checkbox"]
   position: relative;
 }
 
-.dropdown-element
-{
-  padding: 10px;
-  font-size: 12px;
-}
+
 
 ul
 {
