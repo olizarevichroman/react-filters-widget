@@ -13,13 +13,12 @@
   z-index: 10;
 }
 
-
-.dropdown-content::-webkit-scrollbar
+.scrollable::-webkit-scrollbar
 {
 	width: 6px;
 }
 
-.dropdown-content::-webkit-scrollbar-thumb
+.scrollable::-webkit-scrollbar-thumb
 {
 	background-color: #242423;
 }
@@ -97,21 +96,9 @@
   overflow-y: scroll;
 }
 
-
-
 .filter-component
 {
   padding-right: 4px;
-}
-
-.filter-result-container::-webkit-scrollbar
-{
-	width: 6px;
-}
-
-.filter-result-container::-webkit-scrollbar-thumb
-{
-	background-color: #242423;
 }
 
 .filter-elements-container-after::after

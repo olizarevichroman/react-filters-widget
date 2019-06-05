@@ -7,7 +7,7 @@ const mock = ["Editor", "Test", "Test story", "Cross","Editor", "Test", "Test st
 export default class DropdownContentComponent extends Component {
 
     render() {
-        var classNames = "dropdown-content";
+        var classNames = "dropdown-content scrollable";
 
         if (this.props.isVisible === false){
             classNames += " inactive";

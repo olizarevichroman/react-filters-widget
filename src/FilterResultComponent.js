@@ -14,7 +14,7 @@ class FilterResultComponent extends Component {
 
     render() {
         return (
-            <div className="filter-result-container">
+            <div className="filter-result-container scrollable">
                 {mockResults.map((res, index) => <ContentElementComponent text={res} key={index}/>)}
             </div>
         );
