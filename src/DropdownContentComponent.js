@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import ContentElementComponent from './ContentElementComponent';
 
-const mock = ["Editor", "Test", "Test story", "Cross"];
+const mock = ["Editor", "Test", "Test story", "Cross","Editor", "Test", "Test story", "Cross"];
 
 // this.props.elements will be used instead of mock
 export default class DropdownContentComponent extends Component {
