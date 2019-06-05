@@ -23,7 +23,6 @@
 	background-color: #242423;
 }
 
-
 .filter-elements-wrapper
 {
   width: 20px;
@@ -88,9 +87,6 @@
 .filter-result-container
 {
   padding-left: 5px;
-  /* padding-right: 20px;
-  padding-left: 20px;
-  padding-bottom: 10px; */
   min-height: 60px;
   max-height: 400px;
   overflow-y: scroll;
@@ -223,8 +219,6 @@ input[type="checkbox"]
 {
   position: relative;
 }
-
-
 
 ul
 {
