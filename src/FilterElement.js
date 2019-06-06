@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 
 class FilterElement extends Component {
 
-    
-
     constructor(props)
     {
         super(props);

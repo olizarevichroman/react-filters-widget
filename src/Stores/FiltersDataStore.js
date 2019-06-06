@@ -5,7 +5,7 @@ import dispatcher from '../Dispatcher/Dispatcher'
 const mock = ["Editor", "Test", "Test story", "Cross","Editor", "Test", "Test story", "Cross"];
 
 const mockResults = [
-    "(All)", "Pre Roll", "Axfs","Tewrewr", "Rrewfdsf", "Xasdfas","12214g", "vvvv", "ewr435345","34324", "scvbcvb", "sadfmtyuty"
+    "(All)", "Pre Roll", "Axfs", "ewr435345", "Tewrewr", "Rrewfdsf", "Xasdfas","12214g", "vvvv","34324", "scvbcvb", "sadfmtyuty"
 ]
 
 class FiltersDataStore extends EventEmitter
