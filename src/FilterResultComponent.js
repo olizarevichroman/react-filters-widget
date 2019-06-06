@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import ContentElementComponent from './ContentElementComponent';
+import filterDataStore from './Stores/FiltersDataStore'
 
-const mockResults = [
-    "(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero","(All)", "Pre Roll", "Age Zero"
-]
 
 class FilterResultComponent extends Component {
 
     constructor(props)
     {
         super(props);
+
+        this.state = {results: filterDataStore.getFilterResults()}
+    }
+
+    componentWillMount()
+    {
+        filterDataStore.on("onResultsChanged", () => this.setState({
+            results: filterDataStore.getFilterResults()
+        }))
     }
 
     render() {
         return (
             <div className="filter-result-container scrollable">
-                {mockResults.map((res, index) => <ContentElementComponent text={res} key={index}/>)}
+                {this.state.results.map((res, index) => <ContentElementComponent text={res} key={index}/>)}
             </div>
         );
     }

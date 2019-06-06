@@ -1,14 +1,6 @@
 import React, { Component } from 'react';
 import FilterElement from './FilterElement';
 
-var filterF = (arr) => arr;
-
-const mockFilterElements = [
-    {label: "''", filterFunction : filterF, isDefault: true}, 
-    {label: "**", filterFunction : filterF},
-    {label: "//", filterFunction : filterF}
-]
-//We can 
 
 class FilterElementsSelect extends Component {
 
@@ -16,7 +8,6 @@ class FilterElementsSelect extends Component {
     {
         super(props);
 
-        this.state = {...mockFilterElements[0]};
     }
 
 

@@ -22,6 +22,10 @@ class FilterElement extends Component {
         var background = this.isActive ? this.backgrounds.active : this.backgrounds.inactive;
 
         this.setState({"backgroundColor": background});
+
+        var func = this.isActive ? this.props.onActive : this.props.onInactive;
+
+        func();
     }
 
     render() {
