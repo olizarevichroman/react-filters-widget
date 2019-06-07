@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ContentElementComponent from './ContentElementComponent';
 import filterDataStore from './Stores/FiltersDataStore'
+import * as actions from './Actions/Actions'
 
 
 class FilterResultComponent extends Component {
@@ -10,6 +11,8 @@ class FilterResultComponent extends Component {
         super(props);
 
         this.state = {results: filterDataStore.getFilterResults()}
+
+        this.onRecordClicked = this.onRecordClicked.bind(this);
     }
 
     componentWillMount()
@@ -19,10 +22,19 @@ class FilterResultComponent extends Component {
         }))
     }
 
+    onRecordClicked(index)
+    {
+        actions.toggleRecord(index)
+    }
+
     render() {
         return (
             <div className="filter-result-container scrollable">
-                {this.state.results.map((res, index) => <ContentElementComponent text={res} key={index}/>)}
+                {this.state.results.map((rec, index) => <ContentElementComponent text={rec.data} 
+                    onClick={this.onRecordClicked} 
+                    checked={rec.checked} 
+                    key={index} 
+                    index={rec.index}/>)}
             </div>
         );
     }

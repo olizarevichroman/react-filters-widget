@@ -18,8 +18,9 @@ class FiltersDataStore extends EventEmitter
         this.columns = mock;
 
         //filtered records
-        this.filterResults = mockResults;
-        this.filteredData = mockResults;
+        
+        this.filteredData = mockResults.map((e, index) => ({data: e, index, checked: false}));
+        this.filterResults = this.filteredData;
 
         //records which wasn't filtered
         this.allRecords = mockResults;
@@ -54,13 +55,28 @@ class FiltersDataStore extends EventEmitter
         this.emit("onColumnsChanged");
     }
 
+    compareFunction(first, second)
+    {
+        if (first.data > second.data)
+        {
+            return 1;
+        }
+
+        if (first.data < second.data)
+        {
+            return -1;
+        }
+
+        return 0;
+    }
+
     applySort(compareFunction)
     {
-        var newArray = Array.from(this.filteredData);
+        this.filterResults = Array.from(this.filteredData);
 
-        newArray.sort(compareFunction);
+        this.filterResults.sort(this.compareFunction);
 
-        this.setFilterResults(newArray);
+        this.setFilterResults(this.filterResults);
     }
 
     cancelSort()
@@ -82,6 +98,15 @@ class FiltersDataStore extends EventEmitter
         this.emit("onResultsChanged");
     }
 
+    toggleRecord(index)
+    {
+        var element = this.filteredData.find(r => r.index === index);
+
+        element.checked = !element.checked;
+
+        this.setFilterResults(this.filterResults);
+    }
+
     reduce(action)
     {
         switch(action.type)
@@ -93,6 +118,11 @@ class FiltersDataStore extends EventEmitter
 
             case actionTypes.cancelSort : {
                 this.cancelSort();
+                break;
+            };
+
+            case actionTypes.toggleRecord : {
+                this.toggleRecord(action.index);
                 break;
             }
         }

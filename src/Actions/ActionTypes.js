@@ -6,7 +6,8 @@ const actionTypes =
     addTable: "ADD_TABLE",
     applyFilter: "APPLY_FILTER",
     applySort: "APPLY_SORT",
-    cancelSort: "CANCEL_SORT"
+    cancelSort: "CANCEL_SORT",
+    toggleRecord: "TOGGLE_RECORD"
 }
 
 export default actionTypes;

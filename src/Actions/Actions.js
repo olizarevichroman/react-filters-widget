@@ -56,3 +56,11 @@ export function cancelSort()
         type: actionTypes.cancelSort,
     })
 }
+
+export function toggleRecord(index)
+{
+    dispatcher.dispatch({
+        type: actionTypes.toggleRecord,
+        index
+    })
+}
