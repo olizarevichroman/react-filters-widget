@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import ContentElementComponent from './ContentElementComponent';
 import filtersDataStore from './Stores/FiltersDataStore'
+import * as actions from './Actions/Actions'
 
 
 // this.props.elements will be used instead of mock
@@ -24,7 +25,8 @@ export default class DropdownContentComponent extends Component
                 <ul className="dropdown-content scrollable"> 
                     {this.props.data.map((value, index) => <ContentElementComponent                    
                             key={index}
-                            text={value}/>)}
+                            text={value}
+                            onClick = {this.props.onElementClicked}/>)}
                 </ul>
             </div>
         )

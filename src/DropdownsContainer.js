@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import Dropdown from './Dropdown';
 import filtersDataStore from './Stores/FiltersDataStore'
+import * as actions from './Actions/Actions'
 
 export default class DropdownsContainer extends Component {
 
@@ -17,8 +18,8 @@ export default class DropdownsContainer extends Component {
     render() {
         return (
             <div className="dropdowns-container">
-                <Dropdown data={this.state.tables} name="CONTEXTS"/>
-                <Dropdown data={this.state.columns} name="DIMENSIONS"/>
+                <Dropdown onElementClicked = {actions.includeTable} data={this.state.tables} name="CONTEXTS"/>
+                <Dropdown onElementClicked = {actions.includeColumn} data={this.state.columns} name="DIMENSIONS"/>
             </div>
         )
     }

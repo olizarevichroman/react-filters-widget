@@ -8,6 +8,48 @@ const mockResults = [
     "(All)", "Pre Roll", "Axfs", "ewr435345", "Tewrewr", "Rrewfdsf", "Xasdfas","12214g", "vvvv","34324", "scvbcvb", "sadfmtyuty"
 ]
 
+const mockData = [
+
+    {
+        tableName: "Test 1",
+        data: [
+            {
+                columnName : "My column",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
+    },
+
+    {
+        tableName: "Test 2",
+        data: [
+            {
+                columnName : "Test 2 column 1",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            },
+            {
+                columnName : "Test 2 column 2",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
+    },
+
+    {
+        tableName: "Test 3",
+        data: [
+            {
+                columnName : "Test 3 column 1 ",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            },
+            {
+                columnName : "Test 3 column 2 ",
+                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
+    }
+
+]
+
 class FiltersDataStore extends EventEmitter
 {
     constructor()
@@ -43,7 +85,10 @@ class FiltersDataStore extends EventEmitter
 
     addTable(table)
     {
-        this.tables.push(table);
+        if (table && table.tableName)
+        {
+            this.tables.push(table);
+        }
 
         this.emit("onTablesChanged");
     }
@@ -52,7 +97,7 @@ class FiltersDataStore extends EventEmitter
     {
 
 
-        this.emit("onColumnsChanged");
+        // this.emit("onColumnsChanged");
     }
 
     compareFunction(first, second)
@@ -132,5 +177,7 @@ class FiltersDataStore extends EventEmitter
 const filterDataStore =  new FiltersDataStore();
 
 dispatcher.register(filterDataStore.reduce.bind(filterDataStore));
+
+mockData.forEach(t => filterDataStore.addTable(t));
 
 export default filterDataStore;
