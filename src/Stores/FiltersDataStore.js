@@ -56,7 +56,7 @@ class FiltersDataStore extends EventEmitter
     {
         super();
 
-        this.tables = mock;
+        this.tables = [];
         this.columns = mock;
 
         //filtered records
@@ -83,11 +83,19 @@ class FiltersDataStore extends EventEmitter
         return this.filterResults;
     }
 
-    addTable(table)
+    addTables(tablesToAdd)
     {
-        if (table && table.tableName)
+        var self = this;
+
+        if (tablesToAdd && tablesToAdd instanceof Array)
         {
-            this.tables.push(table);
+            tablesToAdd.forEach(function(table){
+        
+                if (table && table.tableName)
+                {
+                    self.tables.push(table);
+                }
+            });
         }
 
         this.emit("onTablesChanged");
@@ -115,7 +123,7 @@ class FiltersDataStore extends EventEmitter
         return 0;
     }
 
-    applySort(compareFunction)
+    applySort()
     {
         this.filterResults = Array.from(this.filteredData);
 
@@ -178,6 +186,6 @@ const filterDataStore =  new FiltersDataStore();
 
 dispatcher.register(filterDataStore.reduce.bind(filterDataStore));
 
-mockData.forEach(t => filterDataStore.addTable(t));
+filterDataStore.addTables(mockData);
 
 export default filterDataStore;
