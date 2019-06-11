@@ -79,7 +79,8 @@ class FiltersDataStore extends EventEmitter
             {
                 self.columns.push({
                     tableName,
-                    columnName: col.columnName
+                    columnName: col.columnName,
+                    checked: false
                 })
             }
         })
@@ -98,7 +99,17 @@ class FiltersDataStore extends EventEmitter
 
     toggleColumn(tableName, columnName)
     {
-        //we should exclude records contained in the current column
+        var column = this.columns.find( col => (col.tableName === tableName && col.columnName === columnName));
+
+        if (!column)
+        {
+            return;
+        }
+
+        column.checked = !column.checked;
+
+        this.emit(eventTypes.onColumnsChanged);
+        //here we should add or delete records by column
     }
 
     compareFunction(first, second)

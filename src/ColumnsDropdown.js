@@ -41,7 +41,7 @@ class ColumnsDropdown extends Component {
                                 key = {index}
                                 text = {value.columnName}
                                 checked = {value.checked}
-                                onClick = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
+                                onChange = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
                 </DropdownContent>
             </Dropdown>
         );

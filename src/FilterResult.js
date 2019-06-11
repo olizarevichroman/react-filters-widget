@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ContentElementComponent from './ContentElement';
+import ContentElement from './ContentElement';
 import filterDataStore from './Stores/FiltersDataStore'
 import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes';
@@ -41,7 +41,7 @@ class FilterResult extends Component {
     render() {
         return (
             <div className="filter-result-container scrollable">
-                {this.state.results.map((rec, index) => <ContentElementComponent text={rec.data} 
+                {this.state.results.map((rec, index) => <ContentElement text={rec.data} 
                     onClick={this.onRecordClicked} 
                     checked={rec.checked} 
                     key={index} 
