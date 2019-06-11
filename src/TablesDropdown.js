@@ -34,8 +34,13 @@ class TablesDropdown extends Component {
     }
 
     render() {
+        var header = <DropdownHeaderComponent 
+                        toogle = {this.toogleDropdown} 
+                        name = {this.props.name}
+                        selectedValues = {this.state.selectedTables}/>;
+
         return (
-            <Dropdown name="CONTEXTS">
+            <Dropdown>
                 <DropdownContent isVisible = {this.state.isVisible}>
                     {this.state.tablesState.map((value, index) => <ContentElement                 
                                 key = {index}

@@ -22,12 +22,15 @@ class FiltersDataStore extends EventEmitter
         this.tablesState = [];
 
         //filtered records
-        
-        this.filteredData = [];
-        this.filterResults = [];
-
         //records which wasn't filtered
         this.allRecords = [];
+
+        this.filteredData = [];
+        this.filterResults = this.allRecords;
+
+        this.isSorted = false;
+
+        this.filterFunction = null;
     }
 
     getColumns()
@@ -99,7 +102,8 @@ class FiltersDataStore extends EventEmitter
 
     toggleColumn(tableName, columnName)
     {
-        var column = this.columns.find( col => (col.tableName === tableName && col.columnName === columnName));
+        var column = this.columns.find( col => 
+            (col.tableName === tableName && col.columnName === columnName));
 
         if (!column)
         {
@@ -108,8 +112,58 @@ class FiltersDataStore extends EventEmitter
 
         column.checked = !column.checked;
 
+        if (column.checked)
+        {
+            this.addRecords(tableName, columnName);
+        }
+        else
+        {
+            this.removeRecords(tableName, columnName)
+        }
+
         this.emit(eventTypes.onColumnsChanged);
         //here we should add or delete records by column
+    }
+
+    addRecords(tableName, columnName)
+    {
+        var filteredRecords;
+
+        var records = this.tables
+            .find(t => (t.tableName === tableName))
+            .data
+            .find(c => (c.columnName === columnName))
+            .data;
+
+        if (!records && !records instanceof Array)
+        {
+            return;
+        }
+
+        var recordsToAdd = records.map(rec => ({
+            tableName,
+            columnName,
+            data: rec,
+            checked: false
+        }));
+
+        //here we should also apply filter if it turned on
+        recordsToAdd.forEach((rec) => this.allRecords.push(rec));
+
+        this.filteredData = this.allRecords;
+
+        this.emit(eventTypes.onResultsChanged);
+    }
+
+    removeRecords(tableName, columnName)
+    {
+        this.allRecords = this.allRecords.filter(rec => 
+            rec.tableName !== tableName && rec.columnName !== columnName);
+
+        //only while filters is not implemented, needed to apply sorting
+        this.filteredData = this.allRecords;
+
+        this.emit(eventTypes.onResultsChanged);
     }
 
     compareFunction(first, second)
@@ -139,13 +193,6 @@ class FiltersDataStore extends EventEmitter
     cancelSort()
     {
         this.setFilterResults(this.filteredData);
-    }
-
-    applyFilter(filterFunction)
-    {
-        var newData = this.allRecords.filter(filterFunction);
-
-        this.setFilterResults(newData);
     }
 
     setFilterResults(data)
