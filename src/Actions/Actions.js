@@ -10,11 +10,20 @@ export function includeColumn(tableId, columnId)
     })
 }
 
-export function includeTable(tableId)
+export function toggleTable(tableName)
 {
     dispatcher.dispatch({
-        type: actionTypes.includeTable,
-        tableId
+        type: actionTypes.toggleTable,
+        tableName
+    })
+}
+
+export function toggleColumn(tableName, columnName)
+{
+    dispatcher.dispatch({
+        type: actionTypes.toggleColumn,
+        tableName,
+        columnName
     })
 }
 

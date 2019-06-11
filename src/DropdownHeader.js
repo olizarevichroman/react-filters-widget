@@ -3,7 +3,7 @@ import DropdownArrow from './DropdownArrow';
 
 const selectedMock = ["Test", "TestStory"];
 
-export default class DropdownHeaderComponent extends Component {
+export default class DropdownHeader extends Component {
     render() {
         return (
             <div className="dropdown-header">

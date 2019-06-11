@@ -160,11 +160,6 @@
   background-color: #474646;
 }
 
-.inactive
-{
-  display: none;
-}
-
 .searchWrapper *
 {
   display: inline-block;

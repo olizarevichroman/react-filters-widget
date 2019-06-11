@@ -3,16 +3,10 @@ import DropdownsContainer from './DropdownsContainer';
 import FilterComponent from './FilterComponent';
 
 class FiltersWidgetContentContainer extends Component {
+
     render() {
-        var classNames = "widget-content-container";
-
-        if (this.props.isContentVisible === false)
-        {
-            classNames += " inactive";
-        }
-
         return (
-            <div className={classNames}>
+            <div className="widget-content-container">
                 <DropdownsContainer/>
                 <FilterComponent/>
             </div>

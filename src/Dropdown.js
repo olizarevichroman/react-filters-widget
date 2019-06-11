@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import DropdownHeaderComponent from './DropdownHeaderComponent';
-import DropdownContentComponent from './DropdownContentComponent';
+import DropdownHeaderComponent from './DropdownHeader';
 
 export default class Dropdown extends Component {
 
@@ -18,10 +17,11 @@ export default class Dropdown extends Component {
     };
     
     render() {
+
         return (
             <div>
                 <DropdownHeaderComponent toogle={this.toogleDropdown} name={this.props.name}/>
-                <DropdownContentComponent onElementClicked = {this.props.onElementClicked} data={this.props.data} isVisible={this.state.isVisible}/>
+                {this.state.isVisible && this.props.children}
             </div>
         )
     }

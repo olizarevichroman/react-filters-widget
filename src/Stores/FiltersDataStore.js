@@ -46,9 +46,56 @@ const mockData = [
                 data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
             }
         ]
+    },
+
+    {
+        tableName: "Test 4",
+        data: [
+            {
+                columnName : "Test 3 column 1 ",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            },
+            {
+                columnName : "Test 3 column 2 ",
+                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
+    },
+    {
+        tableName: "Test 5",
+        data: [
+            {
+                columnName : "Test 3 column 1 ",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            },
+            {
+                columnName : "Test 3 column 2 ",
+                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
+    },
+    {
+        tableName: "Test 6",
+        data: [
+            {
+                columnName : "Test 3 column 1 ",
+                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
+            },
+            {
+                columnName : "Test 3 column 2 ",
+                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
+            }
+        ]
     }
 
 ]
+
+
+//filteredData - all records with filter applied
+
+//filterResults - filtered data with sorting applied
+
+//allRecords - records from all included columns
 
 class FiltersDataStore extends EventEmitter
 {
@@ -57,15 +104,17 @@ class FiltersDataStore extends EventEmitter
         super();
 
         this.tables = [];
-        this.columns = mock;
+        this.columns = [];
+
+        this.tablesState = [];
 
         //filtered records
         
-        this.filteredData = mockResults.map((e, index) => ({data: e, index, checked: false}));
-        this.filterResults = this.filteredData;
+        this.filteredData = [];
+        this.filterResults = [];
 
         //records which wasn't filtered
-        this.allRecords = mockResults;
+        this.allRecords = [];
     }
 
     getColumns()
@@ -75,7 +124,7 @@ class FiltersDataStore extends EventEmitter
 
     getTables()
     {
-        return this.tables;
+        return this.tablesState;
     }
 
     getFilterResults()
@@ -93,6 +142,12 @@ class FiltersDataStore extends EventEmitter
         
                 if (table && table.tableName)
                 {
+                    self.tablesState.push({
+                        tableName: table.tableName,
+                        checked: false
+                    });
+
+                    //push all data related to the table
                     self.tables.push(table);
                 }
             });
@@ -101,11 +156,34 @@ class FiltersDataStore extends EventEmitter
         this.emit("onTablesChanged");
     }
 
-    includeColumn(tableId, columnId)
+    //when table checked to true
+    addColumns(tableName, columns)
     {
+        columns.forEach(function (col, index) {
+            if (col.columnName)
+            {
+                this.columns.push({
+                    tableName,
+                    columnId: index
+                })
+            }
+        })
+
+        this.emit("onColumnsChanged");
+    }
+
+    //when table checked to false
+    removeColumns(tableName)
+    {
+        this.columns = this.columns.filter((col) => col.tableName !== tableName);
+
+        this.emit("onColumnsChanged");
+    }
 
 
-        // this.emit("onColumnsChanged");
+    toggleColumn(tableName, columnName)
+    {
+        //we should exclude records contained in the current column
     }
 
     compareFunction(first, second)
@@ -151,13 +229,32 @@ class FiltersDataStore extends EventEmitter
         this.emit("onResultsChanged");
     }
 
+    toggleTable(tableName)
+    {
+        var table = this.tables.find((t) => (t.tableName === tableName));
+
+        var tableState = this.tablesState.find(t => (t.tableName === tableName));
+
+        tableState.checked = !tableState.checked;
+        
+        if (table)
+        {
+            if (tableState.checked === true)
+            {
+                this.addColumns(table.data);
+            }
+            else
+            {
+                this.removeColumns(table.tableName)
+            }
+        }
+    }
+
     toggleRecord(index)
     {
         var element = this.filteredData.find(r => r.index === index);
 
         element.checked = !element.checked;
-
-        this.setFilterResults(this.filterResults);
     }
 
     reduce(action)
@@ -177,6 +274,16 @@ class FiltersDataStore extends EventEmitter
             case actionTypes.toggleRecord : {
                 this.toggleRecord(action.index);
                 break;
+            };
+            
+            case actionTypes.toggleTable : {
+                this.toggleTable(action.tableName);
+                break;
+            }
+
+            case actionTypes.toggleColumn : {
+                this.toggleColumn(action.tableName, action.columnName);
+                break;
             }
         }
     }
@@ -187,5 +294,7 @@ const filterDataStore =  new FiltersDataStore();
 dispatcher.register(filterDataStore.reduce.bind(filterDataStore));
 
 filterDataStore.addTables(mockData);
+
+window.filterDataStore = filterDataStore;
 
 export default filterDataStore;

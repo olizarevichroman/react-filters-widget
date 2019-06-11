@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import SearchComponent from './SearchComponent';
 import FilterElementsContainer from './FilterElementsContainer';
-import FilterResultComponent from './FilterResultComponent';
+import FilterResultComponent from './FilterResult';
 
 
 

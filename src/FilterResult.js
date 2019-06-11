@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import ContentElementComponent from './ContentElementComponent';
+import ContentElementComponent from './ContentElement';
 import filterDataStore from './Stores/FiltersDataStore'
 import * as actions from './Actions/Actions'
 
-
-class FilterResultComponent extends Component {
+class FilterResult extends Component {
 
     constructor(props)
     {
@@ -13,13 +12,24 @@ class FilterResultComponent extends Component {
         this.state = {results: filterDataStore.getFilterResults()}
 
         this.onRecordClicked = this.onRecordClicked.bind(this);
+        this.handleResultsChanged = this.handleResultsChanged.bind(this);
+    }
+
+    handleResultsChanged()
+    {
+        this.setState({
+            results: filterDataStore.getFilterResults()
+        });
     }
 
     componentWillMount()
     {
-        filterDataStore.on("onResultsChanged", () => this.setState({
-            results: filterDataStore.getFilterResults()
-        }))
+        filterDataStore.on("onResultsChanged", this.handleResultsChanged);
+    }
+
+    componentWillUnmount()
+    {
+        filterDataStore.removeListener("onResultsChanged", this.handleResultsChanged);
     }
 
     onRecordClicked(index)
@@ -40,4 +50,4 @@ class FilterResultComponent extends Component {
     }
 }
 
-export default FilterResultComponent;
+export default FilterResult;
