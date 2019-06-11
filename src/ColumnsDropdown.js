@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Dropdown from './Dropdown';
+import DropdownHeader from './DropdownHeader';
 import filterDataStore from './Stores/FiltersDataStore'
 import DropdownContent from './DropdownContent'
 import ContentElement from './ContentElement'
@@ -12,8 +12,21 @@ class ColumnsDropdown extends Component {
     {
         super(props);
 
-        this.state = { columnsState: filterDataStore.getColumns()}
+        this.state = { 
+            columnsState: filterDataStore.getColumns(),
+            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName),
+            isContentVisible: false
+        }
+
         this.handleColumnsChanged = this.handleColumnsChanged.bind(this);
+        this.toggleContent = this.toggleContent.bind(this);
+    }
+
+    toggleContent()
+    {
+        this.setState(function(prev) {
+            return {isContentVisible: !prev.isContentVisible};
+        });
     }
 
     handleColumnsChanged()
@@ -35,15 +48,23 @@ class ColumnsDropdown extends Component {
 
     render() {
         return (
-            <Dropdown name="DIMENSIONS">
-                <DropdownContent isVisible = {this.state.isVisible}>
-                    {this.state.columnsState.map((value, index) => <ContentElement                 
-                                key = {index}
-                                text = {value.columnName}
-                                checked = {value.checked}
-                                onChange = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
-                </DropdownContent>
-            </Dropdown>
+            <div>
+                <DropdownHeader
+                    toogle = {this.toggleContent} 
+                    name = "DIMENSIONS"
+                    selectedValues = {this.state.selectedColumns}
+                />
+
+                {this.state.isContentVisible && 
+                    <DropdownContent>
+                        {this.state.columnsState.map((value, index) => <ContentElement                 
+                                    key = {index}
+                                    text = {value.columnName}
+                                    checked = {value.checked}
+                                    onChange = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
+                    </DropdownContent>
+                }
+            </div>
         );
     }
 }

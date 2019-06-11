@@ -96,7 +96,12 @@ class FiltersDataStore extends EventEmitter
     {
         this.columns = this.columns.filter((col) => col.tableName !== tableName);
 
+        this.columns.forEach(col => {
+            this.removeRecords(tableName, col.columnName)
+        });
+
         this.emit(eventTypes.onColumnsChanged);
+        this.emit(eventTypes.onResultsChanged);
     }
 
 
@@ -122,7 +127,7 @@ class FiltersDataStore extends EventEmitter
         }
 
         this.emit(eventTypes.onColumnsChanged);
-        //here we should add or delete records by column
+        this.emit(eventTypes.onResultsChanged);
     }
 
     addRecords(tableName, columnName)
@@ -151,8 +156,6 @@ class FiltersDataStore extends EventEmitter
         recordsToAdd.forEach((rec) => this.allRecords.push(rec));
 
         this.filteredData = this.allRecords;
-
-        this.emit(eventTypes.onResultsChanged);
     }
 
     removeRecords(tableName, columnName)
@@ -162,8 +165,6 @@ class FiltersDataStore extends EventEmitter
 
         //only while filters is not implemented, needed to apply sorting
         this.filteredData = this.allRecords;
-
-        this.emit(eventTypes.onResultsChanged);
     }
 
     compareFunction(first, second)

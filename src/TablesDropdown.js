@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import Dropdown from './Dropdown';
 import DropdownContent from './DropdownContent'
 import filterDataStore from './Stores/FiltersDataStore'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes'
+import DropdownHeader from './DropdownHeader'
 
 class TablesDropdown extends Component {
 
@@ -12,8 +12,13 @@ class TablesDropdown extends Component {
     {
         super(props);
 
-        this.state = { tablesState: filterDataStore.getTables()}
+        this.state = { 
+            tablesState: filterDataStore.getTables(),
+            isContentVisible: false
+        };
+
         this.handleTablesChanged = this.handleTablesChanged.bind(this);
+        this.toggleContent = this.toggleContent.bind(this);
     }
 
     handleTablesChanged()
@@ -33,22 +38,32 @@ class TablesDropdown extends Component {
         filterDataStore.removeListener(eventTypes.onTablesChanged, this.handleTablesChanged);
     }
 
+    toggleContent()
+    {
+        this.setState(prev => ({
+            isContentVisible: !prev.isContentVisible
+        }))
+    }
+
     render() {
-        var header = <DropdownHeaderComponent 
-                        toogle = {this.toogleDropdown} 
-                        name = {this.props.name}
-                        selectedValues = {this.state.selectedTables}/>;
 
         return (
-            <Dropdown>
-                <DropdownContent isVisible = {this.state.isVisible}>
-                    {this.state.tablesState.map((value, index) => <ContentElement                 
-                                key = {index}
-                                text = {value.tableName}
-                                checked = {value.checked}
-                                onChange = {() => actions.toggleTable(value.tableName)}/>)}
-                </DropdownContent>
-            </Dropdown>
+            <div>
+                <DropdownHeader
+                    toogle = {this.toggleContent} 
+                    name = "CONTEXTS"
+                    selectedValues = {this.state.selectedTables}
+                />
+
+                {this.state.isContentVisible && 
+                    <DropdownContent>
+                        {this.state.tablesState.map((value, index) => <ContentElement                 
+                                    key = {index}
+                                    text = {value.tableName}
+                                    checked = {value.checked}
+                                    onChange = {() => actions.toggleTable(value.tableName)}/>)}
+                </DropdownContent>}
+            </div>
         );
     }
 }

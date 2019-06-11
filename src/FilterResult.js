@@ -42,7 +42,8 @@ class FilterResult extends Component {
         return (
             <div className="filter-result-container scrollable">
                 {this.state.results.map((rec, index) => <ContentElement text={rec.data} 
-                    checked={rec.checked} 
+                    checked={rec.checked}
+                    onChange = {() => console.log("change")}
                     key={index} 
                     index={rec.index}/>)}
             </div>

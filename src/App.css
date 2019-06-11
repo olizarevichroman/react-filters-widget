@@ -9,7 +9,7 @@
   background-color: #474646;
 }
 
-.dropdown-content-container
+/* .dropdown-content-container
 {
   padding-right: 3px;
   position: absolute;
@@ -18,7 +18,7 @@
   border-top: 5px solid #3d7dcc;
   width: 230px;
   z-index: 10;
-}
+} */
 
 .scrollable::-webkit-scrollbar
 {
