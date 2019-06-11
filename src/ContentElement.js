@@ -1,19 +1,12 @@
 import React, { Component } from 'react'
+import Checkbox from './Checkbox';
 
 export default class ContentElement extends Component {
-
-    constructor(props)
-    {
-        super(props);
-    }
-
-    //onClick={() => this.props.onClick(this.props.index)}
-
 
     render() {
         return (
             <div className="dropdown-element">
-                <input type="checkbox"/>
+                <Checkbox checked = {this.props.checked} onChange = {this.props.onChange}/>
                 <span>{this.props.text}</span>
             </div>
         )

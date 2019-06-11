@@ -4,6 +4,7 @@ import DropdownContent from './DropdownContent'
 import filterDataStore from './Stores/FiltersDataStore'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
+import eventTypes from './Events/EventTypes'
 
 class TablesDropdown extends Component {
 
@@ -24,12 +25,12 @@ class TablesDropdown extends Component {
 
     componentWillMount()
     {
-        filterDataStore.on("onTablesChanged", this.handleTablesChanged);
+        filterDataStore.on(eventTypes.onTablesChanged, this.handleTablesChanged);
     }
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener("onTablesChanged", this.handleTablesChanged);
+        filterDataStore.removeListener(eventTypes.onTablesChanged, this.handleTablesChanged);
     }
 
     render() {
@@ -40,7 +41,7 @@ class TablesDropdown extends Component {
                                 key = {index}
                                 text = {value.tableName}
                                 checked = {value.checked}
-                                onClick = {() => actions.toggleTable(value.tableName)}/>)}
+                                onChange = {() => actions.toggleTable(value.tableName)}/>)}
                 </DropdownContent>
             </Dropdown>
         );

@@ -1,95 +1,8 @@
 import EventEmitter from 'events';
 import actionTypes from '../Actions/ActionTypes'
 import dispatcher from '../Dispatcher/Dispatcher'
-
-const mock = ["Editor", "Test", "Test story", "Cross","Editor", "Test", "Test story", "Cross"];
-
-const mockResults = [
-    "(All)", "Pre Roll", "Axfs", "ewr435345", "Tewrewr", "Rrewfdsf", "Xasdfas","12214g", "vvvv","34324", "scvbcvb", "sadfmtyuty"
-]
-
-const mockData = [
-
-    {
-        tableName: "Test 1",
-        data: [
-            {
-                columnName : "My column",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    },
-
-    {
-        tableName: "Test 2",
-        data: [
-            {
-                columnName : "Test 2 column 1",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            },
-            {
-                columnName : "Test 2 column 2",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    },
-
-    {
-        tableName: "Test 3",
-        data: [
-            {
-                columnName : "Test 3 column 1 ",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            },
-            {
-                columnName : "Test 3 column 2 ",
-                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    },
-
-    {
-        tableName: "Test 4",
-        data: [
-            {
-                columnName : "Test 3 column 1 ",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            },
-            {
-                columnName : "Test 3 column 2 ",
-                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    },
-    {
-        tableName: "Test 5",
-        data: [
-            {
-                columnName : "Test 3 column 1 ",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            },
-            {
-                columnName : "Test 3 column 2 ",
-                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    },
-    {
-        tableName: "Test 6",
-        data: [
-            {
-                columnName : "Test 3 column 1 ",
-                data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
-            },
-            {
-                columnName : "Test 3 column 2 ",
-                data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
-            }
-        ]
-    }
-
-]
-
+import mockData from '../mockes'
+import eventTypes from '../Events/EventTypes'
 
 //filteredData - all records with filter applied
 
@@ -153,23 +66,25 @@ class FiltersDataStore extends EventEmitter
             });
         }
 
-        this.emit("onTablesChanged");
+        this.emit(eventTypes.onTablesChanged);
     }
 
     //when table checked to true
     addColumns(tableName, columns)
     {
-        columns.forEach(function (col, index) {
+        var self = this;
+
+        columns.forEach(function (col) {
             if (col.columnName)
             {
-                this.columns.push({
+                self.columns.push({
                     tableName,
-                    columnId: index
+                    columnName: col.columnName
                 })
             }
         })
 
-        this.emit("onColumnsChanged");
+        this.emit(eventTypes.onColumnsChanged);
     }
 
     //when table checked to false
@@ -177,7 +92,7 @@ class FiltersDataStore extends EventEmitter
     {
         this.columns = this.columns.filter((col) => col.tableName !== tableName);
 
-        this.emit("onColumnsChanged");
+        this.emit(eventTypes.onColumnsChanged);
     }
 
 
@@ -226,7 +141,7 @@ class FiltersDataStore extends EventEmitter
     {
         this.filterResults = data;
 
-        this.emit("onResultsChanged");
+        this.emit(eventTypes.onResultsChanged);
     }
 
     toggleTable(tableName)
@@ -241,13 +156,15 @@ class FiltersDataStore extends EventEmitter
         {
             if (tableState.checked === true)
             {
-                this.addColumns(table.data);
+                this.addColumns(tableName, table.data);
             }
             else
             {
                 this.removeColumns(table.tableName)
             }
         }
+
+        this.emit(eventTypes.onTablesChanged);
     }
 
     toggleRecord(index)

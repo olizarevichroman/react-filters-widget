@@ -1,7 +1,4 @@
 import React, { Component } from 'react'
-import Dropdown from './Dropdown';
-import filtersDataStore from './Stores/FiltersDataStore'
-import * as actions from './Actions/Actions'
 import TablesDropdown from './TablesDropdown';
 import ColumnsDropdown from './ColumnsDropdown';
 

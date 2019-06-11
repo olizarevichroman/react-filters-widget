@@ -4,6 +4,7 @@ import filterDataStore from './Stores/FiltersDataStore'
 import DropdownContent from './DropdownContent'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
+import eventTypes from './Events/EventTypes'
 
 class ColumnsDropdown extends Component {
 
@@ -20,6 +21,16 @@ class ColumnsDropdown extends Component {
         this.setState({
             columnsState: filterDataStore.getColumns()
         })
+    }
+
+    componentWillMount()
+    {
+        filterDataStore.on(eventTypes.onColumnsChanged, this.handleColumnsChanged);
+    }
+
+    componentWillUnmount()
+    {
+        filterDataStore.removeListener(eventTypes.onColumnsChanged, this.handleColumnsChanged);
     }
 
     render() {

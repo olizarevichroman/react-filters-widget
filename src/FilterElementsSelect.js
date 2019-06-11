@@ -1,15 +1,6 @@
 import React, { Component } from 'react';
-import FilterElement from './FilterElement';
-
 
 class FilterElementsSelect extends Component {
-
-    constructor(props)
-    {
-        super(props);
-
-    }
-
 
     render() {
         return (
