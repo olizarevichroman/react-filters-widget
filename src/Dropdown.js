@@ -43,7 +43,6 @@ class Dropdown extends Component {
                     data = {headerData}
                     isContentVisible = {this.state.isContentVisible}
                 />
-
                 {this.state.isContentVisible && this.props.children}
             </div>
         );

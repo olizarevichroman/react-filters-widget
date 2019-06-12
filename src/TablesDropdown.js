@@ -4,7 +4,6 @@ import filterDataStore from './Stores/FiltersDataStore'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes'
-import DropdownHeader from './DropdownHeader'
 import Dropdown from './Dropdown';
 
 class TablesDropdown extends Component {

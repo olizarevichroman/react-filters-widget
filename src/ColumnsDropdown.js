@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import DropdownHeader from './DropdownHeader';
 import filterDataStore from './Stores/FiltersDataStore'
 import DropdownContent from './DropdownContent'
 import ContentElement from './ContentElement'
