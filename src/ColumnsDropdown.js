@@ -5,6 +5,7 @@ import DropdownContent from './DropdownContent'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes'
+import Dropdown from './Dropdown';
 
 class ColumnsDropdown extends Component {
 
@@ -12,40 +13,19 @@ class ColumnsDropdown extends Component {
     {
         super(props);
 
-        this.reducer = this.reducer.bind(this);
-
         this.state = { 
             columnsState: filterDataStore.getColumns(),
-            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName).reduce(this.reducer, ""),
-            isContentVisible: false
+            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName),
         }
 
         this.handleColumnsChanged = this.handleColumnsChanged.bind(this);
-        this.toggleContent = this.toggleContent.bind(this);
-    }
-
-    reducer(previous, current, index)
-    {
-        if (index === 0)
-        {
-            return current;
-        }
-        
-        return `${previous}, ${current}`;
-    }
-
-    toggleContent()
-    {
-        this.setState(function(prev) {
-            return {isContentVisible: !prev.isContentVisible};
-        });
     }
 
     handleColumnsChanged()
     {
         this.setState({
             columnsState: filterDataStore.getColumns(),
-            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName).reduce(this.reducer, "")
+            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName)
         })
     }
 
@@ -61,24 +41,15 @@ class ColumnsDropdown extends Component {
 
     render() {
         return (
-            <div>
-                <DropdownHeader
-                    toogle = {this.toggleContent} 
-                    name = "DIMENSIONS"
-                    selectedValues = {this.state.selectedColumns}
-                    isContentVisible = {this.state.isContentVisible}
-                />
-
-                {this.state.isContentVisible && 
-                    <DropdownContent>
-                        {this.state.columnsState.map((value, index) => <ContentElement                 
-                                    key = {index}
-                                    text = {value.columnName}
-                                    checked = {value.checked}
-                                    onChange = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
-                    </DropdownContent>
-                }
-            </div>
+            <Dropdown name = "DIMENSIONS" selectedValues = {this.state.selectedColumns}>
+                <DropdownContent>
+                    {this.state.columnsState.map((value, index) => <ContentElement                 
+                                key = {index}
+                                text = {value.columnName}
+                                checked = {value.checked}
+                                onChange = {() => actions.toggleColumn(value.tableName, value.columnName)}/>)}
+                </DropdownContent>
+            </Dropdown>
         );
     }
 }
