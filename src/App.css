@@ -9,16 +9,10 @@
   background-color: #474646;
 }
 
-/* .dropdown-content-container
+.dropdown-content-container
 {
-  padding-right: 3px;
-  position: absolute;
-  left: 10px;
-  border: 1px solid #b8b8b8;
-  border-top: 5px solid #3d7dcc;
-  width: 230px;
-  z-index: 10;
-} */
+  border-bottom: 1px solid #777;
+}
 
 .scrollable::-webkit-scrollbar
 {
@@ -37,9 +31,16 @@
 
 .filter-elements-select
 {
-  width: 20px;
-  border-radius: 2px;
-  display: inline-block;
+  border: 1px solid #b8b8b8;
+  border-radius: 3px;
+  display: flex;
+  display: -webkit-flex;
+  flex-direction: column;
+  max-width: 35px;
+  position: relative;
+  top: 0;
+  z-index: 10;
+  box-sizing: border-box;
 }
 
 .text-wrapper
@@ -51,6 +52,9 @@
 .filter-elements-container
 {
   padding-left: 35px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
 }
 
 .dropdown-header span
@@ -74,6 +78,8 @@
 {
   display: inline-block;
   margin-left: 5px;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .filtersWidget
@@ -109,6 +115,7 @@
   content: "";
   display: block;
   border-bottom: 1px solid #b8b8b8;
+  flex-wrap: nowrap;
   transform: scaleX(0.85);
   position: relative;
   margin-top: 20px;
@@ -117,12 +124,14 @@
 
 .filter-element
 {
-  display: inline-block;
-  margin-left: 10px;
-  border-radius: 2px;
-  border: 1px solid #b8b8b8;
-  padding: 0px 3px 0px 3px;
+  /* border: 1px solid #b8b8b8; */
+  padding: 5px;
   font-size: 12px;
+  width: 20px;
+  box-sizing: content-box;
+  position: relative;
+  top: 0px;
+  flex-basis: content;
 }
 
 .dropdown-element
@@ -147,11 +156,11 @@
   padding: 10px;
 }
 
-.fa-angle-down
+/* .fa-angle-down
 {
   cursor: pointer;
   font-size: 16px;
-}
+} */
 
 .widget-content-container
 {
@@ -164,6 +173,10 @@
 {
   display: inline-block;
   padding: 10px;
+}
+
+.searchWrapper{
+  padding: 10px 0px 5px 0px;
 }
 
 .dropdown-header
@@ -179,6 +192,11 @@
   color: #fff8f7;
   padding: 2px;
   padding-left: 4px;
+}
+
+.searchWrapper input::placeholder
+{
+  color: #c4c2c1;
 }
 
 .open-close-thik:hover
@@ -203,6 +221,11 @@
 {
   color: #66abdd;
   font-size: 12px;
+  max-width: 110px;
+  white-space: nowrap;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+  position: absolute;
 }
 
 .dropdowns-container

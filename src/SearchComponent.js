@@ -8,7 +8,7 @@ class SearchComponent extends Component {
         return (
             <div className="searchWrapper">
                 <i className="fa fa-search"/>
-                <input type="text"/>
+                <input type="text" placeholder="Find"/>
             </div>
         );
     }

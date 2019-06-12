@@ -53,6 +53,7 @@ class TablesDropdown extends Component {
                     toogle = {this.toggleContent} 
                     name = "CONTEXTS"
                     selectedValues = {this.state.selectedTables}
+                    isContentVisible = {this.state.isContentVisible}
                 />
 
                 {this.state.isContentVisible && 

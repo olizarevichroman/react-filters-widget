@@ -12,14 +12,26 @@ class ColumnsDropdown extends Component {
     {
         super(props);
 
+        this.reducer = this.reducer.bind(this);
+
         this.state = { 
             columnsState: filterDataStore.getColumns(),
-            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName),
+            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName).reduce(this.reducer, ""),
             isContentVisible: false
         }
 
         this.handleColumnsChanged = this.handleColumnsChanged.bind(this);
         this.toggleContent = this.toggleContent.bind(this);
+    }
+
+    reducer(previous, current, index)
+    {
+        if (index === 0)
+        {
+            return current;
+        }
+        
+        return `${previous}, ${current}`;
     }
 
     toggleContent()
@@ -32,7 +44,8 @@ class ColumnsDropdown extends Component {
     handleColumnsChanged()
     {
         this.setState({
-            columnsState: filterDataStore.getColumns()
+            columnsState: filterDataStore.getColumns(),
+            selectedColumns: filterDataStore.getColumns().filter(c => c.checked).map(c => c.columnName).reduce(this.reducer, "")
         })
     }
 
@@ -53,6 +66,7 @@ class ColumnsDropdown extends Component {
                     toogle = {this.toggleContent} 
                     name = "DIMENSIONS"
                     selectedValues = {this.state.selectedColumns}
+                    isContentVisible = {this.state.isContentVisible}
                 />
 
                 {this.state.isContentVisible && 

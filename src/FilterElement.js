@@ -8,7 +8,7 @@ class FilterElement extends Component {
 
         this.isActive = false;
         this.onClick = this.onClick.bind(this);
-        this.backgrounds = {active: "#7d7d78", inactive: "#383737"};
+        this.backgrounds = {active: "#595855", inactive: "#383737"};
         this.state = {"backgroundColor": this.backgrounds.inactive};
     }
 
