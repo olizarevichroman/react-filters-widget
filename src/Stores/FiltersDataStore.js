@@ -13,18 +13,26 @@ class FiltersDataStore extends EventEmitter
 
         this.tables = [];
         this.columns = [];
-
         this.tablesState = [];
         this.allRecords = [];
+        this.sortedRecords = [];
+        this.filterResults = [];
 
-        this.filteredData = [];
-        this.filterResults = this.allRecords;
-        this.isSelectOpened = false;
+        this.isSortOn = false;
 
-        this.isSorted = false;
         this.filterValue = "";
-        this.filters = filterHelper.getFilters();
+
+        this.applyFilter = this.applyFilter.bind(this);
+
+        this.filters = filterHelper.getFilters().map(f => {
+            var filter = {...f};
+            filter.active = false;
+
+            return filter;
+        })
+
         this.activeFilter = this.filters[0];
+        this.activeFilter.active = true;
     }
 
     getColumns()
@@ -95,21 +103,28 @@ class FiltersDataStore extends EventEmitter
     {
         this.columns = this.columns.filter((col) => col.tableName !== tableName);
 
-        this.columns.forEach(col => {
-            this.removeRecords(tableName, col.columnName)
-        });
+        this.tables.find(t => t.tableName === tableName)
+            .data.forEach(colName => {
+                this.removeRecords(tableName, colName)
+            })
+        // this.columns.forEach(col => {
+        //     this.removeRecords(tableName, col.columnName)
+        // });
 
         this.emit(eventTypes.onColumnsChanged);
-        this.emit(eventTypes.onResultsChanged);
     }
 
     toggleFilter(index)
     {
         this.isSelectOpened = !this.isSelectOpened;
 
+        this.activeFilter.active = false;
         this.activeFilter = this.filters[index];
-        this.emit(eventTypes.onFilterChanged);
+        this.activeFilter.active = true;
 
+        this.updateFilterResults();
+
+        this.emit(eventTypes.onFilterChanged);
         this.emit(eventTypes.onSelectToggled);
     }
 
@@ -142,13 +157,10 @@ class FiltersDataStore extends EventEmitter
         }
 
         this.emit(eventTypes.onColumnsChanged);
-        this.emit(eventTypes.onResultsChanged);
     }
 
     addRecords(tableName, columnName)
     {
-        var filteredRecords;
-
         var records = this.tables
             .find(t => (t.tableName === tableName))
             .data
@@ -167,19 +179,44 @@ class FiltersDataStore extends EventEmitter
             checked: false
         }));
 
-        //here we should also apply filter if it turned on
         recordsToAdd.forEach((rec) => this.allRecords.push(rec));
 
-        this.filteredData = this.allRecords;
+        this.updateSortedRecords();
+
+        this.updateFilterResults();
+    }
+
+    updateSortedRecords()
+    {
+        this.sortedRecords = this.allRecords.slice().sort(this.compareFunction);
     }
 
     removeRecords(tableName, columnName)
     {
         this.allRecords = this.allRecords.filter(rec => 
-            rec.tableName !== tableName && rec.columnName !== columnName);
+            !(rec.tableName === tableName && rec.columnName === columnName));
 
-        //only while filters is not implemented, needed to apply sorting
-        this.filteredData = this.allRecords;
+        this.updateSortedRecords();
+        this.updateFilterResults();
+    }
+
+    updateFilterResults()
+    {
+        var filterResults = this.isSortOn ? this.sortedRecords : this.allRecords;
+
+        if (this.filterValue !== "")
+        {
+            filterResults = filterResults.filter(this.applyFilter);
+        }
+
+        this.filterResults = filterResults;
+
+        this.emit(eventTypes.onResultsChanged);
+    }
+
+    applyFilter(value)
+    {
+        return this.activeFilter.filterFunction(this.filterValue, value);
     }
 
     compareFunction(first, second)
@@ -195,27 +232,6 @@ class FiltersDataStore extends EventEmitter
         }
 
         return 0;
-    }
-
-    applySort()
-    {
-        this.filterResults = Array.from(this.filteredData);
-
-        this.filterResults.sort(this.compareFunction);
-
-        this.setFilterResults(this.filterResults);
-    }
-
-    cancelSort()
-    {
-        this.setFilterResults(this.filteredData);
-    }
-
-    setFilterResults(data)
-    {
-        this.filterResults = data;
-
-        this.emit(eventTypes.onResultsChanged);
     }
 
     toggleTable(tableName)
@@ -243,7 +259,7 @@ class FiltersDataStore extends EventEmitter
 
     toggleRecord(index)
     {
-        var element = this.filteredData.find(r => r.index === index);
+        var element = this.filterResults.find(r => r.index === index);
 
         element.checked = !element.checked;
     }
@@ -252,25 +268,22 @@ class FiltersDataStore extends EventEmitter
     {
         this.filterValue = value;
 
-        console.log(this.filterValue);
+        this.updateFilterResults();
+    }
 
-        //here we should execute process to filter all data and if needed apply sort and set new data as filter results
+    toggleSort()
+    {
+        this.isSortOn = !this.isSortOn;
+
+        this.emit(eventTypes.onSortToggled);
+
+        this.updateFilterResults();
     }
 
     reduce(action)
     {
         switch(action.type)
         {
-            case actionTypes.applySort : {
-                this.applySort(action.compareFunction);
-                break;
-            };
-
-            case actionTypes.cancelSort : {
-                this.cancelSort();
-                break;
-            };
-
             case actionTypes.toggleRecord : {
                 this.toggleRecord(action.index);
                 break;
@@ -294,10 +307,15 @@ class FiltersDataStore extends EventEmitter
             case actionTypes.toggleSelect : {
                 this.toggleSelect();
                 break;
-            }
+            };
 
             case actionTypes.toggleFilter : {
                 this.toggleFilter(action.index);
+                break;
+            };
+
+            case actionTypes.toggleSort : {
+                this.toggleSort();
                 break;
             }
         }

@@ -5,9 +5,9 @@ export default class ContentElement extends Component {
 
     render() {
         return (
-            <div className="dropdown-element">
+            <div className="content-element-container">
                 <Checkbox checked = {this.props.checked} onChange = {this.props.onChange}/>
-                <span>{this.props.text}</span>
+                <span className = "content-element">{this.props.text}</span>
             </div>
         )
     }

@@ -24,15 +24,20 @@
   background-color: #242423;
 }
 
+.content-element
+{
+  padding-left: 5px;
+}
+
 .filter-elements-wrapper
 {
-  border: 1px solid #b8b8b8;
+  border: 1.5px solid #b8b8b8;
   border-radius: 3px;
   display: flex;
   display: -webkit-flex;
   flex-direction: column;
   max-width: 35px;
-  position: relative;
+
   top: 0;
   z-index: 10;
   box-sizing: border-box;
@@ -40,7 +45,12 @@
 
 .filter-elements-wrapper:nth-child(2)
 {
-  margin-left: 10px;
+  margin-left: 35px;
+}
+
+.filter-elements-wrapper:nth-child(1)
+{
+  position: absolute;
 }
 
 .text-wrapper
@@ -124,8 +134,8 @@
 
 .filter-element
 {
-  padding: 3px;
-  font-size: 12px;
+  padding: 2px;
+  font-size: 10px;
   width: 20px;
   box-sizing: content-box;
   position: relative;
@@ -133,13 +143,15 @@
   flex-basis: content;
 }
 
-.dropdown-element
+.content-element-container
 {
+  display: flex;
+  align-items: center;
   padding: 10px;
   font-size: 12px;
 }
 
-.dropdown-element:hover
+.content-element-container:hover
 {
   background-color: #3b3a3a;
 }
@@ -185,6 +197,7 @@
   color: #fff8f7;
   padding: 2px;
   padding-left: 4px;
+  font-size: 12px;
 }
 
 .searchWrapper input::placeholder

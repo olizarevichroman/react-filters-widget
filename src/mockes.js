@@ -4,7 +4,7 @@ const mockData = [
         tableName: "Test 1",
         data: [
             {
-                columnName : "My column",
+                columnName : "Test 1 My column",
                 data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
             }
         ]
@@ -42,11 +42,11 @@ const mockData = [
         tableName: "Test 4",
         data: [
             {
-                columnName : "Test 3 column 1 ",
+                columnName : "Test 4 column 1 ",
                 data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
             },
             {
-                columnName : "Test 3 column 2 ",
+                columnName : "Test 4 column 2 ",
                 data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
             }
         ]
@@ -55,11 +55,11 @@ const mockData = [
         tableName: "Test 5",
         data: [
             {
-                columnName : "Test 3 column 1 ",
+                columnName : "Test 5 column 1 ",
                 data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
             },
             {
-                columnName : "Test 3 column 2 ",
+                columnName : "Test 5 column 2 ",
                 data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
             }
         ]
@@ -68,11 +68,11 @@ const mockData = [
         tableName: "Test 6",
         data: [
             {
-                columnName : "Test 3 column 1 ",
+                columnName : "Test 6 column 1 ",
                 data: ["ASdasd", "saasdasd", "213213", "sadasdasd", "asdasdasd"]
             },
             {
-                columnName : "Test 3 column 2 ",
+                columnName : "Test 6 column 2 ",
                 data: ["ASda232sd", "saasdasd111", "213213", "sadasdasd", "asdasdasd"]
             }
         ]

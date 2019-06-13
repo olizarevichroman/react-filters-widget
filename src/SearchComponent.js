@@ -8,7 +8,7 @@ class SearchComponent extends Component {
     {
         super(props);
 
-        this.handleChange = debounce(setFilterValue, 250);
+        this.handleChange = debounce(setFilterValue, 150);
     }
 
     componentWillUnmount()

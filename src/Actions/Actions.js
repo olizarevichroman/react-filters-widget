@@ -43,26 +43,10 @@ export function setFilterResults(results)
     })
 }
 
-export function applyFilter(filterFunction)
+export function toggleSort()
 {
     dispatcher.dispatch({
-        type: actionTypes.applyFilter,
-        filterFunction
-    })
-}
-
-export function applySort(compareFunction)
-{
-    dispatcher.dispatch({
-        type: actionTypes.applySort,
-        compareFunction
-    })
-}
-
-export function cancelSort()
-{
-    dispatcher.dispatch({
-        type: actionTypes.cancelSort,
+        type: actionTypes.toggleSort
     })
 }
 

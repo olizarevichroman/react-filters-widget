@@ -3,7 +3,7 @@ var filters = [];
 var fullMatchFilter = {
     label: "**",
     filterFunction: function(filterValue, record) {   
-        return record === filterValue;
+        return record.data === filterValue;
     }
 }
 
@@ -12,7 +12,7 @@ filters.push(fullMatchFilter);
 var partialMatchFilter = {
     label: "*_",
     filterFunction: function(filterValue, record) {
-        return record.includes(filterValue);
+        return record.data.includes(filterValue);
     }
 }
 
@@ -22,7 +22,7 @@ var startWithFilter = {
     label: '""',
     filterFunction: function(filterValue, record)
     {
-        return record.startsWith(filterValue);
+        return record.data.startsWith(filterValue);
     }
 }
 

@@ -10,7 +10,8 @@ const actionTypes =
     toggleColumn: "TOGGLE_COLUMN",
     setFilterValue: "SET_FILTER_VALUE",
     toggleFilter: "TOGGLE_FILTER",
-    toggleSelect: "TOGGLE_SELECT"
+    toggleSelect: "TOGGLE_SELECT",
+    toggleSort: "TOGGLE_SORT"
 }
 
 export default actionTypes;

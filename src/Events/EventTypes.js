@@ -3,7 +3,8 @@ const eventTypes = {
     onTablesChanged: "onTablesChanged",
     onResultsChanged: "onResultsChanged",
     onSelectToggled: "onSelectToggled",
-    onFilterChanged: "onFilterChanged"
+    onFilterChanged: "onFilterChanged",
+    onSortToggled: "onSortToggled"
 }
 
 export default eventTypes;
