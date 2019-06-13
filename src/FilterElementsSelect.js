@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
 import FilterElement from './FilterElement';
+import filterDataStore from './Stores/FiltersDataStore'
 
 class FilterElementsSelect extends Component {
 
     render() {
         return (
             <div className="filter-elements-select">
-                <FilterElement label="A-Z"/>
-                <FilterElement label="A-Z"/>
-                <FilterElement  label="A-Z"/>
+                {filterDataStore.getFilters().map((value, index) => 
+                    <FilterElement 
+                        label = {value.label}
+                        index = {value.index}
+                        key = {index}/>
+                )}
             </div>
         );
     }

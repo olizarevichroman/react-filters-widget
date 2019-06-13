@@ -3,6 +3,7 @@ import actionTypes from '../Actions/ActionTypes'
 import dispatcher from '../Dispatcher/Dispatcher'
 import mockData from '../mockes'
 import eventTypes from '../Events/EventTypes'
+import filterHelper from '../filterHelper'
 
 //filteredData - all records with filter applied
 
@@ -31,11 +32,17 @@ class FiltersDataStore extends EventEmitter
         this.isSorted = false;
         this.filterValue = "";
         this.filterFunction = null;
+        this.filters = filterHelper.getFilters();
     }
 
     getColumns()
     {
         return this.columns;
+    }
+
+    getFilters()
+    {
+        return this.filters;
     }
 
     getTables()
