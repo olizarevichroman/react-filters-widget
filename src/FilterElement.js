@@ -12,7 +12,8 @@ class FilterElement extends Component {
 
     render() {
         return (
-            <p className="filter-element text-wrapper" style={{"backgroundColor" : this.state["backgroundColor"]}}
+            <p className="filter-element text-wrapper"
+                style={{"backgroundColor" : this.state["backgroundColor"]}}
                 onClick={this.props.onClick}>{this.props.label}</p>
         );
     }

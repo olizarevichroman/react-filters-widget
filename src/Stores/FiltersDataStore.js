@@ -5,12 +5,6 @@ import mockData from '../mockes'
 import eventTypes from '../Events/EventTypes'
 import filterHelper from '../filterHelper'
 
-//filteredData - all records with filter applied
-
-//filterResults - filtered data with sorting applied
-
-//allRecords - records from all included columns
-
 class FiltersDataStore extends EventEmitter
 {
     constructor()
@@ -21,13 +15,11 @@ class FiltersDataStore extends EventEmitter
         this.columns = [];
 
         this.tablesState = [];
-
-        //filtered records
-        //records which wasn't filtered
         this.allRecords = [];
 
         this.filteredData = [];
         this.filterResults = this.allRecords;
+        this.isSelectOpened = false;
 
         this.isSorted = false;
         this.filterValue = "";
@@ -111,6 +103,22 @@ class FiltersDataStore extends EventEmitter
         this.emit(eventTypes.onResultsChanged);
     }
 
+    toggleFilter(index)
+    {
+        this.isSelectOpened = !this.isSelectOpened;
+
+        this.activeFilter = this.filters[index];
+        this.emit(eventTypes.onFilterChanged);
+
+        this.emit(eventTypes.onSelectToggled);
+    }
+
+    toggleSelect()
+    {
+        this.isSelectOpened = !this.isSelectOpened;
+
+        this.emit(eventTypes.onSelectToggled);
+    }
 
     toggleColumn(tableName, columnName)
     {
@@ -280,6 +288,16 @@ class FiltersDataStore extends EventEmitter
 
             case actionTypes.setFilterValue : {
                 this.setFilterValue(action.value);
+                break;
+            };
+
+            case actionTypes.toggleSelect : {
+                this.toggleSelect();
+                break;
+            }
+
+            case actionTypes.toggleFilter : {
+                this.toggleFilter(action.index);
                 break;
             }
         }

@@ -89,3 +89,10 @@ export function toggleFilter(index)
         index
     })
 }
+
+export function toggleSelect(index)
+{
+    dispatcher.dispatch({
+        type: actionTypes.toggleSelect
+    })
+}

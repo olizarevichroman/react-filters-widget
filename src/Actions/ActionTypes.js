@@ -9,7 +9,8 @@ const actionTypes =
     toggleTable: "TOGGLE_TABLE",
     toggleColumn: "TOGGLE_COLUMN",
     setFilterValue: "SET_FILTER_VALUE",
-    toggleFilter: "TOGGLE_FILTER"
+    toggleFilter: "TOGGLE_FILTER",
+    toggleSelect: "TOGGLE_SELECT"
 }
 
 export default actionTypes;

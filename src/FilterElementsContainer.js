@@ -3,6 +3,7 @@ import FilterElement from './FilterElement';
 import * as actions from './Actions/Actions'
 import FilterElementsWrapper from './FilterElementsWrapper';
 import filterDataStore from './Stores/FiltersDataStore';
+import eventTypes from './Events/EventTypes';
 
 class FilterElementsContainer extends Component {
 
@@ -13,11 +14,57 @@ class FilterElementsContainer extends Component {
         this.state = {
             filters: filterDataStore.getFilters(),
             activeFilter: filterDataStore.activeFilter,
-            isSelectOpened: false
+            isSelectOpened: filterDataStore.isSelectOpened
+        }
+
+        this.onSelectOpened = this.onSelectOpened.bind(this);
+        this.handleSelectToggled = this.handleSelectToggled.bind(this);
+        this.handleFilterChanged = this.handleFilterChanged.bind(this);
+    }
+
+    onFilterSelected(index)
+    {
+        if (this.state.activeFilter.index === index)
+        {
+            actions.toggleSelect();
+        }
+        else
+        {
+            actions.toggleFilter(index);
         }
     }
 
+    componentWillMount()
+    {
+        filterDataStore.on(eventTypes.onSelectToggled, this.handleSelectToggled);
+        filterDataStore.on(eventTypes.onFilterChanged, this.handleFilterChanged);
+    }
 
+    componentWillUnmount()
+    {
+        filterDataStore.removeListener(this.handleSelectToggled);
+        filterDataStore.removeListener(this.handleFilterChanged);
+    }
+
+    handleSelectToggled()
+    { 
+        this.setState({
+            isSelectOpened: filterDataStore.isSelectOpened
+        })
+    }
+
+    handleFilterChanged()
+    {
+        this.setState({
+            activeFilter: filterDataStore.activeFilter
+        })
+    }
+
+    onSelectOpened()
+    {
+        actions.toggleSelect();
+    }
+    
 
     render() {
 
@@ -29,17 +76,19 @@ class FilterElementsContainer extends Component {
                             <FilterElement
                                 label = {value.label}
                                 key = {index}
-                                index = {value.index}/>
+                                index = {value.index}
+                                onClick = {() => this.onFilterSelected(value.index)}/>
                         )}
 
                         {!this.state.isSelectOpened && <FilterElement
                                                             label = {this.state.activeFilter.label}
                                                             index = {this.state.activeFilter.label}
+                                                            onClick = {this.onSelectOpened}
                                                             />}
                     </FilterElementsWrapper>
 
                     <FilterElementsWrapper>
-                        <FilterElement onActive={() => actions.applySort()} onInactive={() => actions.cancelSort()} label="A-Z"/>
+                        <FilterElement  label="A-Z"/>
                     </FilterElementsWrapper>
                     
                 </div>
