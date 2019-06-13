@@ -21,10 +21,7 @@ class FilterElementsContainer extends Component {
 
     render() {
 
-        return (
-           
-
-             
+        return (         
             <div className="filter-elements-container-after">
                 <div className="filter-elements-container">
                     <FilterElementsWrapper>
