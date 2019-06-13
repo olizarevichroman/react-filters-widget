@@ -38,6 +38,11 @@
   box-sizing: border-box;
 }
 
+.filter-elements-wrapper:nth-child(2)
+{
+  margin-left: 10px;
+}
+
 .text-wrapper
 {
   text-align: center;
@@ -46,7 +51,7 @@
 
 .filter-elements-container
 {
-  padding-left: 35px;
+  padding-left: 33px;
   position: relative;
   display: flex;
   align-items: flex-start;

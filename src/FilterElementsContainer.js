@@ -11,23 +11,34 @@ class FilterElementsContainer extends Component {
         super(props);
 
         this.state = {
-            filters: filterDataStore.getFilters()
+            filters: filterDataStore.getFilters(),
+            activeFilter: filterDataStore.activeFilter,
+            isSelectOpened: false
         }
     }
 
 
 
     render() {
+
         return (
+           
+
+             
             <div className="filter-elements-container-after">
                 <div className="filter-elements-container">
                     <FilterElementsWrapper>
-                        {filterDataStore.getFilters().map((value, index) =>
+                        {this.state.isSelectOpened && filterDataStore.getFilters().map((value, index) =>
                             <FilterElement
                                 label = {value.label}
                                 key = {index}
                                 index = {value.index}/>
                         )}
+
+                        {!this.state.isSelectOpened && <FilterElement
+                                                            label = {this.state.activeFilter.label}
+                                                            index = {this.state.activeFilter.label}
+                                                            />}
                     </FilterElementsWrapper>
 
                     <FilterElementsWrapper>
