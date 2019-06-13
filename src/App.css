@@ -26,11 +26,6 @@
 
 .filter-elements-wrapper
 {
-  width: 20px;
-}
-
-.filter-elements-select
-{
   border: 1px solid #b8b8b8;
   border-radius: 3px;
   display: flex;

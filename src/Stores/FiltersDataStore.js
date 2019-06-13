@@ -31,8 +31,8 @@ class FiltersDataStore extends EventEmitter
 
         this.isSorted = false;
         this.filterValue = "";
-        this.filterFunction = null;
         this.filters = filterHelper.getFilters();
+        this.activeFilter = this.filters[0];
     }
 
     getColumns()

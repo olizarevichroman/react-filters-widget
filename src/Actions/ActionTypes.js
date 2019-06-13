@@ -8,7 +8,8 @@ const actionTypes =
     toggleRecord: "TOGGLE_RECORD",
     toggleTable: "TOGGLE_TABLE",
     toggleColumn: "TOGGLE_COLUMN",
-    setFilterValue: "SET_FILTER_VALUE"
+    setFilterValue: "SET_FILTER_VALUE",
+    toggleFilter: "TOGGLE_FILTER"
 }
 
 export default actionTypes;

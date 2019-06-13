@@ -81,3 +81,11 @@ export function setFilterValue(value)
         value
     })
 }
+
+export function toggleFilter(index)
+{
+    dispatcher.dispatch({
+        type: actionTypes.toggleFilter,
+        index
+    })
+}
