@@ -73,3 +73,11 @@ export function toggleRecord(index)
         index
     })
 }
+
+export function setFilterValue(value)
+{
+    dispatcher.dispatch({
+        type: actionTypes.setFilterValue,
+        value
+    })
+}

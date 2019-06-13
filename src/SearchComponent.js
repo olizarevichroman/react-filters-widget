@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
+import {setFilterValue} from './Actions/Actions'
 
 class SearchComponent extends Component {
 
@@ -7,12 +8,7 @@ class SearchComponent extends Component {
     {
         super(props);
 
-        this.debouncedHandleChange = debounce(this.handleChange, 250);
-    }
-
-    handleChange(value)
-    {
-        console.log(value);
+        this.handleChange = debounce(setFilterValue, 250);
     }
 
     componentWillUnmount()
@@ -25,7 +21,11 @@ class SearchComponent extends Component {
         return (
             <div className="searchWrapper">
                 <i className="fa fa-search"/>
-                <input type = "text" placeholder = "Find" onChange = {(e) => this.debouncedHandleChange(e.target.value)}/>
+                <input type = "text" 
+                    maxLength = "40" 
+                    placeholder = "Find" 
+                    onChange = {(e) => this.handleChange(e.target.value)}
+                />
             </div>
         );
     }

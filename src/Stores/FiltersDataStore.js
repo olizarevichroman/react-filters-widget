@@ -29,7 +29,7 @@ class FiltersDataStore extends EventEmitter
         this.filterResults = this.allRecords;
 
         this.isSorted = false;
-
+        this.filterValue = "";
         this.filterFunction = null;
     }
 
@@ -233,6 +233,15 @@ class FiltersDataStore extends EventEmitter
         element.checked = !element.checked;
     }
 
+    setFilterValue(value)
+    {
+        this.filterValue = value;
+
+        console.log(this.filterValue);
+
+        //here we should execute process to filter all data and if needed apply sort and set new data as filter results
+    }
+
     reduce(action)
     {
         switch(action.type)
@@ -259,6 +268,11 @@ class FiltersDataStore extends EventEmitter
 
             case actionTypes.toggleColumn : {
                 this.toggleColumn(action.tableName, action.columnName);
+                break;
+            };
+
+            case actionTypes.setFilterValue : {
+                this.setFilterValue(action.value);
                 break;
             }
         }

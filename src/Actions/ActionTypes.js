@@ -7,7 +7,8 @@ const actionTypes =
     cancelSort: "CANCEL_SORT",
     toggleRecord: "TOGGLE_RECORD",
     toggleTable: "TOGGLE_TABLE",
-    toggleColumn: "TOGGLE_COLUMN"
+    toggleColumn: "TOGGLE_COLUMN",
+    setFilterValue: "SET_FILTER_VALUE"
 }
 
 export default actionTypes;
