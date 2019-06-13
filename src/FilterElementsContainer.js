@@ -42,8 +42,8 @@ class FilterElementsContainer extends Component {
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener(this.handleSelectToggled);
-        filterDataStore.removeListener(this.handleFilterChanged);
+        filterDataStore.removeListener(eventTypes.onSelectToggled, this.handleSelectToggled);
+        filterDataStore.removeListener(eventTypes.onFilterChanged, this.handleFilterChanged);
     }
 
     handleSelectToggled()

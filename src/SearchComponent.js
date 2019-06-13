@@ -13,7 +13,7 @@ class SearchComponent extends Component {
 
     componentWillUnmount()
     {
-        this.debouncedHandleChange.cancel();
+        this.handleChange.cancel();
     }
 
     render() {
