@@ -103,13 +103,11 @@ class FiltersDataStore extends EventEmitter
     {
         this.columns = this.columns.filter((col) => col.tableName !== tableName);
 
-        this.tables.find(t => t.tableName === tableName)
-            .data.forEach(colName => {
-                this.removeRecords(tableName, colName)
+        var tableToExclude = this.tables.find(t => t.tableName === tableName);
+
+        tableToExclude.data.forEach(col => {
+                this.removeRecords(tableName, col.columnName)
             })
-        // this.columns.forEach(col => {
-        //     this.removeRecords(tableName, col.columnName)
-        // });
 
         this.emit(eventTypes.onColumnsChanged);
     }
