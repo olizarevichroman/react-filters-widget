@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/react-filters-widget/static/css/main.0e7ccda0.chunk.css",
-    "main.js": "/react-filters-widget/static/js/main.ec315dcf.chunk.js",
-    "main.js.map": "/react-filters-widget/static/js/main.ec315dcf.chunk.js.map",
+    "main.js": "/react-filters-widget/static/js/main.8f650e90.chunk.js",
+    "main.js.map": "/react-filters-widget/static/js/main.8f650e90.chunk.js.map",
     "runtime~main.js": "/react-filters-widget/static/js/runtime~main.93680c01.js",
     "runtime~main.js.map": "/react-filters-widget/static/js/runtime~main.93680c01.js.map",
     "static/js/2.55114644.chunk.js": "/react-filters-widget/static/js/2.55114644.chunk.js",
     "static/js/2.55114644.chunk.js.map": "/react-filters-widget/static/js/2.55114644.chunk.js.map",
     "index.html": "/react-filters-widget/index.html",
-    "precache-manifest.715f13695235df5665b460d900224f3c.js": "/react-filters-widget/precache-manifest.715f13695235df5665b460d900224f3c.js",
+    "precache-manifest.495bbe21917785decf90b6bedb198b4e.js": "/react-filters-widget/precache-manifest.495bbe21917785decf90b6bedb198b4e.js",
     "service-worker.js": "/react-filters-widget/service-worker.js",
     "static/css/main.0e7ccda0.chunk.css.map": "/react-filters-widget/static/css/main.0e7ccda0.chunk.css.map"
   }
