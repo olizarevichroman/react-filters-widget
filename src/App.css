@@ -186,6 +186,8 @@
 
 .dropdown-header
 {
+  display: flex;
+  align-items: center;
   padding: 5px;
 }
 
@@ -231,7 +233,6 @@
   white-space: nowrap;
   overflow-x: hidden;
   text-overflow: ellipsis;
-  position: absolute;
 }
 
 .dropdowns-container
