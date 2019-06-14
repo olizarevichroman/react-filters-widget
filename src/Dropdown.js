@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import DropdownHeader from './DropdownHeader';
+import filterDataStore from './Stores/FiltersDataStore';
+import eventTypes from './Events/EventTypes';
+import {toggleDropdown} from './Actions/Actions'
 
 class Dropdown extends Component {
 
@@ -8,17 +11,38 @@ class Dropdown extends Component {
         super(props);
 
         this.state = { 
-            isContentVisible: false
+            isDropdownOpened: filterDataStore.isDropdownOpened(this.props.name)
         };
 
         this.toggleContent = this.toggleContent.bind(this);
+        this.handleDropdownToggled = this.handleDropdownToggled.bind(this);
+    }
+
+    componentWillMount()
+    {
+        filterDataStore.on(eventTypes.onDropdownToggled, this.handleDropdownToggled);
+    }
+
+    componentWillUnmount()
+    {
+        filterDataStore.removeListener(eventTypes.onDropdownToggled, this.handleDropdownToggled);
     }
 
     toggleContent()
     {
-        this.setState(prev => ({
-            isContentVisible: !prev.isContentVisible
-        }))
+        toggleDropdown(this.props.name);
+    }
+
+    handleDropdownToggled()
+    {
+        var currentState = filterDataStore.isDropdownOpened(this.props.name);
+
+        if (currentState !== this.state.isDropdownOpened)
+        {
+            this.setState({
+                isDropdownOpened: currentState
+            })
+        }
     }
 
     reducer(previous, current, index)
@@ -41,9 +65,9 @@ class Dropdown extends Component {
                     toogle = {this.toggleContent} 
                     name = {this.props.name}
                     data = {headerData}
-                    isContentVisible = {this.state.isContentVisible}
+                    isContentVisible = {this.state.isDropdownOpened}
                 />
-                {this.state.isContentVisible && this.props.children}
+                {this.state.isDropdownOpened && this.props.children}
             </div>
         );
     }

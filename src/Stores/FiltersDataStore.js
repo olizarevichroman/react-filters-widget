@@ -19,6 +19,8 @@ class FiltersDataStore extends EventEmitter
         this.filterResults = [];
 
         this.isSortOn = false;
+        this.isTablesDropdownOpened = false;
+        this.isColumnsDropdownOpened = false;
 
         this.filterValue = "";
 
@@ -31,8 +33,36 @@ class FiltersDataStore extends EventEmitter
             return filter;
         })
 
+        this.isTablesDropdownOpened = false;
+
         this.activeFilter = this.filters[0];
         this.activeFilter.active = true;
+    }
+
+    isDropdownOpened(name)
+    {
+        if (name === "CONTEXTS")
+        {
+            return this.isTablesDropdownOpened;
+        }
+        else if (name === "DIMENSIONS")
+        {
+            return this.isColumnsDropdownOpened;
+        }
+    }
+
+    toggleDropdown(name)
+    {
+        if (name === "CONTEXTS")
+        {
+            this.isTablesDropdownOpened = !this.isTablesDropdownOpened;
+        }
+        else if (name === "DIMENSIONS")
+        {
+            this.isColumnsDropdownOpened = !this.isColumnsDropdownOpened;
+        }
+
+        this.emit(eventTypes.onDropdownToggled);
     }
 
     getColumns()
@@ -314,6 +344,11 @@ class FiltersDataStore extends EventEmitter
 
             case actionTypes.toggleSort : {
                 this.toggleSort();
+                break;
+            };
+
+            case actionTypes.toggleDropdown : {
+                this.toggleDropdown(action.name);
                 break;
             }
         }

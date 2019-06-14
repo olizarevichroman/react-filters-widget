@@ -74,9 +74,17 @@ export function toggleFilter(index)
     })
 }
 
-export function toggleSelect(index)
+export function toggleSelect()
 {
     dispatcher.dispatch({
         type: actionTypes.toggleSelect
+    })
+}
+
+export function toggleDropdown(name)
+{
+    dispatcher.dispatch({
+        type: actionTypes.toggleDropdown,
+        name
     })
 }

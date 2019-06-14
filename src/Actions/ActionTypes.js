@@ -9,7 +9,8 @@ const actionTypes =
     setFilterValue: "SET_FILTER_VALUE",
     toggleFilter: "TOGGLE_FILTER",
     toggleSelect: "TOGGLE_SELECT",
-    toggleSort: "TOGGLE_SORT"
+    toggleSort: "TOGGLE_SORT",
+    toggleDropdown: "TOGGLE_DROPDOWN"
 }
 
 export default actionTypes;
