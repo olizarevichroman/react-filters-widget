@@ -191,6 +191,11 @@
   padding: 5px;
 }
 
+.dropdown-header:hover
+{
+  cursor: pointer;
+}
+
 .searchWrapper input
 {
   background-color: #777;

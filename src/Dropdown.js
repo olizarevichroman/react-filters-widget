@@ -62,7 +62,7 @@ class Dropdown extends Component {
         return (
             <div>
                 <DropdownHeader
-                    toogle = {this.toggleContent} 
+                    toggle = {this.toggleContent} 
                     name = {this.props.name}
                     data = {headerData}
                     isContentVisible = {this.state.isDropdownOpened}
