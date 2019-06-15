@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
 import {setFilterValue} from './Actions/Actions'
+import filterDataStore from './Stores/FiltersDataStore';
+import eventTypes from './Events/EventTypes';
 
 class SearchComponent extends Component {
 
@@ -8,12 +10,27 @@ class SearchComponent extends Component {
     {
         super(props);
 
-        this.handleChange = debounce(setFilterValue, 150);
+        this.state = {filterValue: filterDataStore.filterValue}
+    }
+
+    componentWillMount()
+    {
+        this.debouncedHandleChange = debounce(setFilterValue, 100);
+        this.filterValue = filterDataStore.filterValue;
     }
 
     componentWillUnmount()
     {
-        this.handleChange.cancel();
+        this.debouncedHandleChange.cancel();
+    }
+
+    handleChange(value)
+    {
+        this.setState({
+            filterValue: value
+        });
+
+        this.debouncedHandleChange(value);
     }
 
     render() {
@@ -23,7 +40,8 @@ class SearchComponent extends Component {
                 <i className="fa fa-search"/>
                 <input type = "text" 
                     maxLength = "40" 
-                    placeholder = "Find" 
+                    placeholder = "Find"
+                    value = {this.state.filterValue} 
                     onChange = {(e) => this.handleChange(e.target.value)}
                 />
             </div>

@@ -297,6 +297,8 @@ class FiltersDataStore extends EventEmitter
         this.filterValue = value;
 
         this.updateFilterResults();
+
+        this.emit(eventTypes.onFilterValueChanged);
     }
 
     toggleSort()

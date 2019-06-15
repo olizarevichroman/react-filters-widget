@@ -5,7 +5,8 @@ const eventTypes = {
     onSelectToggled: "onSelectToggled",
     onFilterChanged: "onFilterChanged",
     onSortToggled: "onSortToggled",
-    onDropdownToggled: "onDropdownToggled"
+    onDropdownToggled: "onDropdownToggled",
+    onFilterValueChanged: "onFilterValueChanged"
 }
 
 export default eventTypes;
