@@ -6,7 +6,7 @@ import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes'
 import Dropdown from './Dropdown';
 
-class ColumnsDropdown extends Component {
+export default class ColumnsDropdown extends Component {
 
     constructor(props)
     {
@@ -52,5 +52,3 @@ class ColumnsDropdown extends Component {
         );
     }
 }
-
-export default ColumnsDropdown;

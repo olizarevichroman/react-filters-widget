@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import debounce from 'lodash.debounce';
 import {setFilterValue} from './Actions/Actions'
 import filterDataStore from './Stores/FiltersDataStore';
-import eventTypes from './Events/EventTypes';
 
-class SearchComponent extends Component {
+export default class SearchComponent extends Component {
 
     constructor(props)
     {
@@ -48,5 +47,3 @@ class SearchComponent extends Component {
         );
     }
 }
-
-export default SearchComponent;

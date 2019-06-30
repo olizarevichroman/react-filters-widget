@@ -3,9 +3,7 @@ import SearchComponent from './SearchComponent';
 import FilterElementsContainer from './FilterElementsContainer';
 import FilterResultComponent from './FilterResult';
 
-
-
-class FilterComponent extends Component {
+export default class FilterComponent extends Component {
     render() {
         return (
             <div className="filter-component">
@@ -16,5 +14,3 @@ class FilterComponent extends Component {
         );
     }
 }
-
-export default FilterComponent;

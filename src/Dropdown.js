@@ -4,7 +4,7 @@ import filterDataStore from './Stores/FiltersDataStore';
 import eventTypes from './Events/EventTypes';
 import {toggleDropdown} from './Actions/Actions'
 
-class Dropdown extends Component {
+export default class Dropdown extends Component {
 
     constructor(props)
     {
@@ -72,5 +72,3 @@ class Dropdown extends Component {
         );
     }
 }
-
-export default Dropdown;

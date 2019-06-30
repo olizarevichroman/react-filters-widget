@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class DraggableButton extends Component {
+export default class DraggableButton extends Component {
 
     constructor(props)
     {
@@ -43,5 +43,3 @@ class DraggableButton extends Component {
         );
     }
 }
-
-export default DraggableButton;

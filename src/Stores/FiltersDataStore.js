@@ -85,7 +85,7 @@ class FiltersDataStore extends EventEmitter
         return this.filterResults;
     }
 
-    addTables(tablesToAdd)
+    addTables (tablesToAdd) 
     {
         var self = this;
 
@@ -110,7 +110,7 @@ class FiltersDataStore extends EventEmitter
     }
 
     //when table checked to true
-    addColumns(tableName, columns)
+    addColumns (tableName, columns)
     {
         var self = this;
 
@@ -314,45 +314,39 @@ class FiltersDataStore extends EventEmitter
     {
         switch(action.type)
         {
-            case actionTypes.toggleRecord : {
+            case actionTypes.toggleRecord : 
                 this.toggleRecord(action.index);
                 break;
-            };
             
-            case actionTypes.toggleTable : {
+            case actionTypes.toggleTable :
                 this.toggleTable(action.tableName);
                 break;
-            }
 
-            case actionTypes.toggleColumn : {
+            case actionTypes.toggleColumn :
                 this.toggleColumn(action.tableName, action.columnName);
                 break;
-            };
 
-            case actionTypes.setFilterValue : {
+            case actionTypes.setFilterValue :
                 this.setFilterValue(action.value);
                 break;
-            };
 
-            case actionTypes.toggleSelect : {
+            case actionTypes.toggleSelect : 
                 this.toggleSelect();
                 break;
-            };
 
-            case actionTypes.toggleFilter : {
+            case actionTypes.toggleFilter :
                 this.toggleFilter(action.index);
                 break;
-            };
 
-            case actionTypes.toggleSort : {
+            case actionTypes.toggleSort :
                 this.toggleSort();
                 break;
-            };
 
-            case actionTypes.toggleDropdown : {
+            case actionTypes.toggleDropdown :
                 this.toggleDropdown(action.name);
                 break;
-            }
+
+            default: break;
         }
     }
 }

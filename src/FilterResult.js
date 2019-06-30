@@ -4,7 +4,7 @@ import filterDataStore from './Stores/FiltersDataStore'
 import * as actions from './Actions/Actions'
 import eventTypes from './Events/EventTypes';
 
-class FilterResult extends Component {
+export default class FilterResult extends Component {
 
     constructor(props)
     {
@@ -50,5 +50,3 @@ class FilterResult extends Component {
         );
     }
 }
-
-export default FilterResult;

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Checkbox extends Component {
+export default class Checkbox extends Component {
     render() {
         return (
             <input type="checkbox"
@@ -9,5 +9,3 @@ class Checkbox extends Component {
         );
     }
 }
-
-export default Checkbox;

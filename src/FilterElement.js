@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class FilterElement extends Component {
+export default class FilterElement extends Component {
     render() {
         return (
             <p className="filter-element text-wrapper"
@@ -9,5 +9,3 @@ class FilterElement extends Component {
         );
     }
 }
-
-export default FilterElement;
