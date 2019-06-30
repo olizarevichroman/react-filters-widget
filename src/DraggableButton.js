@@ -11,10 +11,10 @@ class DraggableButton extends Component {
         this.onMouseMove = this.onMouseMove.bind(this);
     }
 
-    onMouseDown(pageX, pageY)
+    onMouseDown = e =>
     {
-        this.cursorX = pageX;
-        this.cursorY = pageY;
+        this.cursorX = e.pageX;
+        this.cursorY = e.pageY;
 
         document.onmousemove = this.onMouseMove;
     }
@@ -37,7 +37,7 @@ class DraggableButton extends Component {
     render() {
         return (
             <span className="fa fa-bars" 
-            onMouseDown={(e) => this.onMouseDown(e.pageX, e.pageY)}
+            onMouseDown={this.onMouseDown}
             onMouseUp={this.onMouseUp}
             />
         );
