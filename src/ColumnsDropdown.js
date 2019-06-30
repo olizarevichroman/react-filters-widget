@@ -3,7 +3,7 @@ import filterDataStore from './Stores/FiltersDataStore'
 import DropdownContent from './DropdownContent'
 import ContentElement from './ContentElement'
 import * as actions from './Actions/Actions'
-import eventTypes from './Events/EventTypes'
+import EventTypes from './Events/EventTypes'
 import Dropdown from './Dropdown';
 
 export default class ColumnsDropdown extends Component {
@@ -30,12 +30,12 @@ export default class ColumnsDropdown extends Component {
 
     componentWillMount()
     {
-        filterDataStore.on(eventTypes.onColumnsChanged, this.handleColumnsChanged);
+        filterDataStore.on(EventTypes.onColumnsChanged, this.handleColumnsChanged);
     }
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener(eventTypes.onColumnsChanged, this.handleColumnsChanged);
+        filterDataStore.removeListener(EventTypes.onColumnsChanged, this.handleColumnsChanged);
     }
 
     render() {

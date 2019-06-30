@@ -1,12 +1,12 @@
-const eventTypes = {
-    onColumnsChanged: "onColumnsChanged",
-    onTablesChanged: "onTablesChanged",
-    onResultsChanged: "onResultsChanged",
-    onSelectToggled: "onSelectToggled",
-    onFilterChanged: "onFilterChanged",
-    onSortToggled: "onSortToggled",
-    onDropdownToggled: "onDropdownToggled",
-    onFilterValueChanged: "onFilterValueChanged"
+const EventTypes = {
+    onColumnsChanged: "OnColumnsChanged",
+    onTablesChanged: "OnTablesChanged",
+    onResultsChanged: "OnResultsChanged",
+    onSelectToggled: "OnSelectToggled",
+    onFilterChanged: "OnFilterChanged",
+    onSortToggled: "OnSortToggled",
+    onDropdownToggled: "OnDropdownToggled",
+    onFilterValueChanged: "OnFilterValueChanged"
 }
 
-export default eventTypes;
+export default EventTypes;

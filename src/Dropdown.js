@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DropdownHeader from './DropdownHeader';
 import filterDataStore from './Stores/FiltersDataStore';
-import eventTypes from './Events/EventTypes';
+import EventTypes from './Events/EventTypes';
 import {toggleDropdown} from './Actions/Actions'
 
 export default class Dropdown extends Component {
@@ -20,12 +20,12 @@ export default class Dropdown extends Component {
 
     componentWillMount()
     {
-        filterDataStore.on(eventTypes.onDropdownToggled, this.handleDropdownToggled);
+        filterDataStore.on(EventTypes.onDropdownToggled, this.handleDropdownToggled);
     }
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener(eventTypes.onDropdownToggled, this.handleDropdownToggled);
+        filterDataStore.removeListener(EventTypes.onDropdownToggled, this.handleDropdownToggled);
     }
 
     toggleContent()

@@ -2,6 +2,8 @@ var filters = [];
 
 var fullMatchFilter = {
     label: "**",
+    filterType: "FULL_MATCH",
+
     filterFunction: function(filterValue, record) {   
         return record.data === filterValue;
     }
@@ -11,6 +13,8 @@ filters.push(fullMatchFilter);
 
 var partialMatchFilter = {
     label: "*_",
+    filterType: "PARTIAL_MATCH",
+
     filterFunction: function(filterValue, record) {
         return record.data.includes(filterValue);
     }
@@ -20,6 +24,8 @@ filters.push(partialMatchFilter);
 
 var startWithFilter = {
     label: '""',
+    filterType: "STARTS_WITH",
+
     filterFunction: function(filterValue, record)
     {
         return record.data.startsWith(filterValue);
@@ -38,12 +44,7 @@ class FilterHelper
 
     initializeFilters()
     {
-        this.filters = filters.map((f, index) => {
-            var filter = {...f};
-            filter.index = index
-
-            return filter;
-        })
+        this.filters = filters;
     }
 
     getFilters()

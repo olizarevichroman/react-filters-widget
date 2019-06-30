@@ -1,10 +1,10 @@
 import dispatcher from '../Dispatcher/Dispatcher';
-import actionTypes from './ActionTypes'
+import ActionTypes from './ActionTypes'
 
 export function includeColumn(tableId, columnId)
 {
     dispatcher.dispatch({
-        type: actionTypes.includeColumn,
+        type: ActionTypes.includeColumn,
         tableId,
         columnId
     })
@@ -13,7 +13,7 @@ export function includeColumn(tableId, columnId)
 export function toggleTable(tableName)
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleTable,
+        type: ActionTypes.toggleTable,
         tableName
     })
 }
@@ -21,7 +21,7 @@ export function toggleTable(tableName)
 export function toggleColumn(tableName, columnName)
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleColumn,
+        type: ActionTypes.toggleColumn,
         tableName,
         columnName
     })
@@ -30,7 +30,7 @@ export function toggleColumn(tableName, columnName)
 export function addTable(table)
 {
     dispatcher.dispatch({
-        type: actionTypes.addTable,
+        type: ActionTypes.addTable,
         table
     })
 }
@@ -38,7 +38,7 @@ export function addTable(table)
 export function setFilterResults(results)
 {
     dispatcher.dispatch({
-        type: actionTypes.setFilterResults,
+        type: ActionTypes.setFilterResults,
         results
     })
 }
@@ -46,14 +46,14 @@ export function setFilterResults(results)
 export function toggleSort()
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleSort
+        type: ActionTypes.toggleSort
     })
 }
 
 export function toggleRecord(index)
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleRecord,
+        type: ActionTypes.toggleRecord,
         index
     })
 }
@@ -61,30 +61,30 @@ export function toggleRecord(index)
 export function setFilterValue(value)
 {
     dispatcher.dispatch({
-        type: actionTypes.setFilterValue,
+        type: ActionTypes.setFilterValue,
         value
     })
 }
 
-export function toggleFilter(index)
+export function toggleFilter(filterType)
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleFilter,
-        index
+        type: ActionTypes.toggleFilter,
+        filterType
     })
 }
 
 export function toggleSelect()
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleSelect
+        type: ActionTypes.toggleSelect
     })
 }
 
 export function toggleDropdown(name)
 {
     dispatcher.dispatch({
-        type: actionTypes.toggleDropdown,
+        type: ActionTypes.toggleDropdown,
         name
     })
 }

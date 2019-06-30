@@ -1,8 +1,8 @@
 import EventEmitter from 'events';
-import actionTypes from '../Actions/ActionTypes'
+import ActionTypes from '../Actions/ActionTypes'
 import dispatcher from '../Dispatcher/Dispatcher'
 import mockData from '../mockes'
-import eventTypes from '../Events/EventTypes'
+import EventTypes from '../Events/EventTypes'
 import filterHelper from '../filterHelper'
 
 class FiltersDataStore extends EventEmitter
@@ -39,6 +39,7 @@ class FiltersDataStore extends EventEmitter
         this.activeFilter.active = true;
     }
 
+    //edit - avoid hardcoding of dropdown names
     isDropdownOpened(name)
     {
         if (name === "CONTEXTS")
@@ -51,6 +52,7 @@ class FiltersDataStore extends EventEmitter
         }
     }
 
+    //edit - avoid toogle dependence from dropdown names
     toggleDropdown(name)
     {
         if (name === "CONTEXTS")
@@ -62,28 +64,16 @@ class FiltersDataStore extends EventEmitter
             this.isColumnsDropdownOpened = !this.isColumnsDropdownOpened;
         }
 
-        this.emit(eventTypes.onDropdownToggled);
+        this.emit(EventTypes.onDropdownToggled);
     }
 
-    getColumns()
-    {
-        return this.columns;
-    }
+    getColumns = () => this.columns;
 
-    getFilters()
-    {
-        return this.filters;
-    }
+    getFilters = () => this.filters;
 
-    getTables()
-    {
-        return this.tablesState;
-    }
+    getTables = () => this.tablesState;
 
-    getFilterResults()
-    {
-        return this.filterResults;
-    }
+    getFilterResults = () => this.filterResults;
 
     addTables (tablesToAdd) 
     {
@@ -106,7 +96,7 @@ class FiltersDataStore extends EventEmitter
             });
         }
 
-        this.emit(eventTypes.onTablesChanged);
+        this.emit(EventTypes.onTablesChanged);
     }
 
     //when table checked to true
@@ -125,7 +115,7 @@ class FiltersDataStore extends EventEmitter
             }
         })
 
-        this.emit(eventTypes.onColumnsChanged);
+        this.emit(EventTypes.onColumnsChanged);
     }
 
     //when table checked to false
@@ -139,28 +129,36 @@ class FiltersDataStore extends EventEmitter
                 this.removeRecords(tableName, col.columnName)
             })
 
-        this.emit(eventTypes.onColumnsChanged);
+        this.emit(EventTypes.onColumnsChanged);
     }
 
-    toggleFilter(index)
+    toggleFilter(filterType)
     {
+        var activeFilter;
         this.isSelectOpened = !this.isSelectOpened;
 
         this.activeFilter.active = false;
-        this.activeFilter = this.filters[index];
+        activeFilter = this.filters.find(f => f.filterType === filterType);
+
+        if (activeFilter === false)
+        {
+            return;
+        }
+
+        this.activeFilter = activeFilter;
         this.activeFilter.active = true;
 
         this.updateFilterResults();
 
-        this.emit(eventTypes.onFilterChanged);
-        this.emit(eventTypes.onSelectToggled);
+        this.emit(EventTypes.onFilterChanged);
+        this.emit(EventTypes.onSelectToggled);
     }
 
     toggleSelect()
     {
         this.isSelectOpened = !this.isSelectOpened;
 
-        this.emit(eventTypes.onSelectToggled);
+        this.emit(EventTypes.onSelectToggled);
     }
 
     toggleColumn(tableName, columnName)
@@ -184,7 +182,7 @@ class FiltersDataStore extends EventEmitter
             this.removeRecords(tableName, columnName)
         }
 
-        this.emit(eventTypes.onColumnsChanged);
+        this.emit(EventTypes.onColumnsChanged);
     }
 
     addRecords(tableName, columnName)
@@ -214,10 +212,7 @@ class FiltersDataStore extends EventEmitter
         this.updateFilterResults();
     }
 
-    updateSortedRecords()
-    {
-        this.sortedRecords = this.allRecords.slice().sort(this.compareFunction);
-    }
+    updateSortedRecords = () => this.sortedRecords = this.allRecords.slice().sort(this.compareFunction);
 
     removeRecords(tableName, columnName)
     {
@@ -239,13 +234,10 @@ class FiltersDataStore extends EventEmitter
 
         this.filterResults = filterResults;
 
-        this.emit(eventTypes.onResultsChanged);
+        this.emit(EventTypes.onResultsChanged);
     }
 
-    applyFilter(value)
-    {
-        return this.activeFilter.filterFunction(this.filterValue, value);
-    }
+    applyFilter = (value) => this.activeFilter.filterFunction(this.filterValue, value);
 
     compareFunction(first, second)
     {
@@ -282,7 +274,7 @@ class FiltersDataStore extends EventEmitter
             }
         }
 
-        this.emit(eventTypes.onTablesChanged);
+        this.emit(EventTypes.onTablesChanged);
     }
 
     toggleRecord(index)
@@ -298,14 +290,14 @@ class FiltersDataStore extends EventEmitter
 
         this.updateFilterResults();
 
-        this.emit(eventTypes.onFilterValueChanged);
+        this.emit(EventTypes.onFilterValueChanged);
     }
 
     toggleSort()
     {
         this.isSortOn = !this.isSortOn;
 
-        this.emit(eventTypes.onSortToggled);
+        this.emit(EventTypes.onSortToggled);
 
         this.updateFilterResults();
     }
@@ -314,35 +306,35 @@ class FiltersDataStore extends EventEmitter
     {
         switch(action.type)
         {
-            case actionTypes.toggleRecord : 
+            case ActionTypes.toggleRecord : 
                 this.toggleRecord(action.index);
                 break;
             
-            case actionTypes.toggleTable :
+            case ActionTypes.toggleTable :
                 this.toggleTable(action.tableName);
                 break;
 
-            case actionTypes.toggleColumn :
+            case ActionTypes.toggleColumn :
                 this.toggleColumn(action.tableName, action.columnName);
                 break;
 
-            case actionTypes.setFilterValue :
+            case ActionTypes.setFilterValue :
                 this.setFilterValue(action.value);
                 break;
 
-            case actionTypes.toggleSelect : 
+            case ActionTypes.toggleSelect : 
                 this.toggleSelect();
                 break;
 
-            case actionTypes.toggleFilter :
-                this.toggleFilter(action.index);
+            case ActionTypes.toggleFilter :
+                this.toggleFilter(action.filterType);
                 break;
 
-            case actionTypes.toggleSort :
+            case ActionTypes.toggleSort :
                 this.toggleSort();
                 break;
 
-            case actionTypes.toggleDropdown :
+            case ActionTypes.toggleDropdown :
                 this.toggleDropdown(action.name);
                 break;
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ContentElement from './ContentElement';
 import filterDataStore from './Stores/FiltersDataStore'
 import * as actions from './Actions/Actions'
-import eventTypes from './Events/EventTypes';
+import EventTypes from './Events/EventTypes';
 
 export default class FilterResult extends Component {
 
@@ -25,12 +25,12 @@ export default class FilterResult extends Component {
 
     componentWillMount()
     {
-        filterDataStore.on(eventTypes.onResultsChanged, this.handleResultsChanged);
+        filterDataStore.on(EventTypes.onResultsChanged, this.handleResultsChanged);
     }
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener(eventTypes.onResultsChanged, this.handleResultsChanged);
+        filterDataStore.removeListener(EventTypes.onResultsChanged, this.handleResultsChanged);
     }
 
     onRecordClicked(index)

@@ -3,7 +3,7 @@ import FilterElement from './FilterElement';
 import * as actions from './Actions/Actions'
 import FilterElementsWrapper from './FilterElementsWrapper';
 import filterDataStore from './Stores/FiltersDataStore';
-import eventTypes from './Events/EventTypes';
+import EventTypes from './Events/EventTypes';
 
 class FilterElementsContainer extends Component {
 
@@ -38,30 +38,30 @@ class FilterElementsContainer extends Component {
         })
     }
 
-    onFilterSelected(index)
+    onFilterSelected(filterType)
     {
-        if (this.state.activeFilter.index === index)
+        if (this.state.activeFilter.filterType === filterType)
         {
             actions.toggleSelect();
         }
         else
         {
-            actions.toggleFilter(index);
+            actions.toggleFilter(filterType);
         }
     }
 
     componentWillMount()
     {
-        filterDataStore.on(eventTypes.onSelectToggled, this.handleSelectToggled);
-        filterDataStore.on(eventTypes.onFilterChanged, this.handleFilterChanged);
-        filterDataStore.on(eventTypes.onSortToggled, this.handleSortToggled);
+        filterDataStore.on(EventTypes.onSelectToggled, this.handleSelectToggled);
+        filterDataStore.on(EventTypes.onFilterChanged, this.handleFilterChanged);
+        filterDataStore.on(EventTypes.onSortToggled, this.handleSortToggled);
     }
 
     componentWillUnmount()
     {
-        filterDataStore.removeListener(eventTypes.onSelectToggled, this.handleSelectToggled);
-        filterDataStore.removeListener(eventTypes.onFilterChanged, this.handleFilterChanged);
-        filterDataStore.removeListener(eventTypes.onSortToggled, this.handleSortToggled);
+        filterDataStore.removeListener(EventTypes.onSelectToggled, this.handleSelectToggled);
+        filterDataStore.removeListener(EventTypes.onFilterChanged, this.handleFilterChanged);
+        filterDataStore.removeListener(EventTypes.onSortToggled, this.handleSortToggled);
     }
 
     handleSelectToggled()
@@ -93,8 +93,8 @@ class FilterElementsContainer extends Component {
                             <FilterElement
                                 label = {value.label}
                                 key = {index}
-                                index = {value.index}
-                                onClick = {() => this.onFilterSelected(value.index)}
+                                filterType = {value.filterType}
+                                onClick = {() => this.onFilterSelected(value.filterType)}
                                 active = {value.active}/>
                         )}
 
